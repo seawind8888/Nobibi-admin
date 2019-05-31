@@ -8,6 +8,7 @@ import { queryLayout, pathMatchRegexp } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
+import list from './routes'
 
 const { queryRouteList, logoutUser, queryUserInfo } = api
 
@@ -78,7 +79,7 @@ export default {
       const { locationPathname } = yield select(_ => _.app)
 
       if (success && user) {
-        const { list } = yield call(queryRouteList)
+        // const { list } = yield call(queryRouteList)
         const { permissions } = user
         let routeList = list
         if (

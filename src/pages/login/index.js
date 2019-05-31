@@ -21,6 +21,7 @@ class Login extends PureComponent {
       if (errors) {
         return
       }
+      // dispatch({ type: 'login/login', payload: {params: values} })
       dispatch({ type: 'login/login', payload: values })
     })
   }
