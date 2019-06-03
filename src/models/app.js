@@ -8,7 +8,8 @@ import { queryLayout, pathMatchRegexp } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
-import list from './routes'
+import list from '../routes'
+import Cookies from 'js-cookie'
 
 const { queryRouteList, logoutUser, queryUserInfo } = api
 
@@ -75,34 +76,37 @@ export default {
   },
   effects: {
     *query({ payload }, { call, put, select }) {
-      const { success, user } = yield call(queryUserInfo, payload)
+      const {success, data} = yield call(queryUserInfo, {username: Cookies.get('username')})
       const { locationPathname } = yield select(_ => _.app)
-
-      if (success && user) {
+      if (success && data) {
         // const { list } = yield call(queryRouteList)
-        const { permissions } = user
+        // const { permissions } = user
         let routeList = list
-        if (
-          permissions.role === ROLE_TYPE.ADMIN ||
-          permissions.role === ROLE_TYPE.DEVELOPER
-        ) {
-          permissions.visit = list.map(item => item.id)
-        } else {
-          routeList = list.filter(item => {
-            const cases = [
-              permissions.visit.includes(item.id),
-              item.mpid
-                ? permissions.visit.includes(item.mpid) || item.mpid === '-1'
-                : true,
-              item.bpid ? permissions.visit.includes(item.bpid) : true,
-            ]
-            return cases.every(_ => _)
-          })
+        let permissions = {
+          visit: []
         }
+        permissions.visit = routeList.map(item => item.id)
+        // if (
+        //   permissions.role === ROLE_TYPE.ADMIN ||
+        //   permissions.role === ROLE_TYPE.DEVELOPER
+        // ) {
+          // permissions.visit = list.map(item => item.id)
+        // } else {
+        //   routeList = list.filter(item => {
+        //     const cases = [
+        //       permissions.visit.includes(item.id),
+        //       item.mpid
+        //         ? permissions.visit.includes(item.mpid) || item.mpid === '-1'
+        //         : true,
+        //       item.bpid ? permissions.visit.includes(item.bpid) : true,
+        //     ]
+        //     return cases.every(_ => _)
+        //   })
+        // }
         yield put({
           type: 'updateState',
           payload: {
-            user,
+            // user,
             permissions,
             routeList,
           },

@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import Cookies from 'js-cookie'
 import { cloneDeep, isEmpty } from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
@@ -9,11 +10,20 @@ const { CancelToken } = axios
 window.cancelRequest = new Map()
 
 export default function request(options) {
+  // window.document.cookie =  `username=seawind8823`
+  // options.headers = {
+  //   'content-Type': 'application/json',
+  //   "Accept": "/",
+  //   "Cache-Control": "no-cache",
+  //   "Cookie": window.document.cookie
+  // }
+  options.withCredentials = true
   let { data, url, method = 'get' } = options
   const cloneData = cloneDeep(data)
-
+ 
   try {
-    let domain = ''
+    let domain = 'http://localhost:3001'
+    // let domain = ''
     const urlMatch = url.match(/[a-zA-z]+:\/\/[^/]*/)
     if (urlMatch) {
       ;[domain] = urlMatch
@@ -47,7 +57,7 @@ export default function request(options) {
 
   return axios(options)
     .then(response => {
-      const { statusText, status, data } = response
+      const { message, status, data } = response
 
       let result = {}
       if (typeof data === 'object') {
@@ -61,7 +71,7 @@ export default function request(options) {
 
       return Promise.resolve({
         success: true,
-        message: statusText,
+        message: message,
         statusCode: status,
         ...result,
       })
@@ -79,9 +89,9 @@ export default function request(options) {
       let statusCode
 
       if (response && response instanceof Object) {
-        const { data, statusText } = response
+        const { data, message } = response
         statusCode = response.status
-        msg = data.message || statusText
+        msg = data.message || message
       } else {
         statusCode = 600
         msg = error.message || 'Network Error'

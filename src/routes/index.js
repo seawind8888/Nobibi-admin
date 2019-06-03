@@ -13,7 +13,6 @@ export default  [
   },
   {
     id: '2',
-    breadcrumbParentId: '1',
     name: 'Users',
     zh: {
       name: '用户管理'
@@ -25,11 +24,10 @@ export default  [
     route: '/user',
   },
   {
-    id: '7',
-    breadcrumbParentId: '1',
+    id: '3',
     name: 'Article',
     zh: {
-      name: '用户管理'
+      name: '文章管理'
     },
     'pt-br': {
       name: 'Posts'

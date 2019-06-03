@@ -1,5 +1,7 @@
 import { router, pathMatchRegexp } from 'utils'
 import api from 'api'
+import md5 from 'md5'
+import Cookies from 'js-cookie'
 
 const { loginUser } = api
 
@@ -10,9 +12,13 @@ export default {
 
   effects: {
     *login({ payload }, { put, call, select }) {
-      const data = yield call(loginUser, payload)
+      const data = yield call(loginUser, {
+        username: payload.username,
+        password: md5(payload.password)
+      })
       const { locationQuery } = yield select(_ => _.app)
       if (data.success) {
+        Cookies.set('username', payload.username)
         const { from } = locationQuery
         yield put({ type: 'app/query' })
         if (!pathMatchRegexp('/login', from)) {
