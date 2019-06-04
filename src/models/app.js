@@ -80,7 +80,7 @@ export default {
       const { locationPathname } = yield select(_ => _.app)
       if (success && data) {
         // const { list } = yield call(queryRouteList)
-        // const { permissions } = user
+        const user = data
         let routeList = list
         let permissions = {
           visit: []
@@ -106,7 +106,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            // user,
+            user,
             permissions,
             routeList,
           },
@@ -128,6 +128,7 @@ export default {
 
     *signOut({ payload }, { call, put }) {
       const data = yield call(logoutUser)
+      Cookies.remove('username')
       if (data.success) {
         yield put({
           type: 'updateState',

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { FilterItem } from 'components'
 import { Trans, withI18n } from '@lingui/react'
-import { Form, Button, Row, Col, DatePicker, Input, Cascader } from 'antd'
+import { Form, Button, Row, Col, DatePicker, Input, Select } from 'antd'
 import city from 'utils/city'
 
 const { Search } = Input
@@ -35,8 +35,8 @@ class Filter extends Component {
     const { createTime } = fields
     if (createTime.length) {
       fields.createTime = [
-        moment(createTime[0]).format('YYYY-MM-DD'),
-        moment(createTime[1]).format('YYYY-MM-DD'),
+        moment(createTime[0]).format('YYYY-MM-DD hh:mm:ss'),
+        moment(createTime[1]).format('YYYY-MM-DD hh:mm:ss'),
       ]
     }
     return fields
@@ -77,11 +77,15 @@ class Filter extends Component {
     fields = this.handleFields(fields)
     onFilterChange(fields)
   }
+  handleChangeRoles = (key, values) => {
+    const { form, onFilterChange } = this.props
+    console.log(key +';'+ values)
+  }
 
   render() {
     const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
-    const { name, address } = filter
+    const { userCode, refUserRoleCode } = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {
@@ -94,29 +98,28 @@ class Filter extends Component {
     return (
       <Row gutter={24}>
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('name', { initialValue: name })(
+          {getFieldDecorator('userCode', { initialValue: userCode || null })(
             <Search
               placeholder={i18n.t`Search Name`}
               onSearch={this.handleSubmit}
             />
           )}
         </Col>
-        <Col
-          {...ColProps}
-          xl={{ span: 4 }}
-          md={{ span: 8 }}
-          id="addressCascader"
-        >
-          {getFieldDecorator('address', { initialValue: address })(
-            <Cascader
-              style={{ width: '100%' }}
-              options={city}
-              placeholder={i18n.t`Please pick an address`}
-              onChange={this.handleChange.bind(this, 'address')}
-              getPopupContainer={() =>
-                document.getElementById('addressCascader')
-              }
-            />
+        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
+          {getFieldDecorator('refUserRoleCode', { initialValue: refUserRoleCode })(
+            <Select
+              style={{ width: 200 }}
+              onChange={this.handleChangeRoles}
+              placeholder={i18n.t`Roles`}
+              allowClear
+            >
+              <Option value="ADMIN">
+                <Trans>ADMIN</Trans>
+              </Option>
+              <Option value="USER">
+                <Trans>USER</Trans>
+              </Option>
+            </Select>
           )}
         </Col>
         <Col

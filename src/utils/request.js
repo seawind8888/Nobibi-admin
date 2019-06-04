@@ -10,13 +10,6 @@ const { CancelToken } = axios
 window.cancelRequest = new Map()
 
 export default function request(options) {
-  // window.document.cookie =  `username=seawind8823`
-  // options.headers = {
-  //   'content-Type': 'application/json',
-  //   "Accept": "/",
-  //   "Cache-Control": "no-cache",
-  //   "Cookie": window.document.cookie
-  // }
   options.withCredentials = true
   let { data, url, method = 'get' } = options
   const cloneData = cloneDeep(data)
@@ -57,23 +50,29 @@ export default function request(options) {
 
   return axios(options)
     .then(response => {
-      const { message, status, data } = response
-
-      let result = {}
-      if (typeof data === 'object') {
-        result = data
-        if (Array.isArray(data)) {
-          result.list = data
-        }
-      } else {
-        result.data = data
-      }
+      const { data } = response
+      const { status } = data
+      const success = status === 200?true:false
+      // if(!success) {
+      //   message.error(data.message)
+      // } 
+      // const { message, status, data } = response
+      // let result = {}
+      // if (typeof data === 'object') {
+      //   result = data
+      //   if (Array.isArray(data)) {
+      //     result.list = data
+      //   }
+      // } else {
+      //   result.data = data
+      // }
+  
 
       return Promise.resolve({
-        success: true,
-        message: message,
-        statusCode: status,
-        ...result,
+        success: success,
+        // message: message,
+        // statusCode: status,
+        ...data,
       })
     })
     .catch(error => {

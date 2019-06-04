@@ -21,7 +21,7 @@
   "Image": "图像",
   "Light": "明",
   "Male": "男性",
-  "Name": "名字",
+  "Name": "用户名",
   "NickName": "昵称",
   "Not Found": "未找到",
   "Operation": "操作",
@@ -34,7 +34,7 @@
   "Publish Date": "发布日期",
   "Reset": "重置",
   "Search": "搜索",
-  "Search Name": "搜索名字",
+  "Search Name": "搜索用户名",
   "Send": "发送",
   "Sign in": "登录",
   "Sign out": "退出登录",
@@ -47,8 +47,12 @@
   "Unpublished": "未发布",
   "Update": "更新",
   "Update User": "更新用户",
-  "Username": "用户名",
   "Views": "浏览数",
   "Visibility": "可见性",
-  "You have viewed all notifications.": "您已查看所有通知"
+  "You have viewed all notifications.": "您已查看所有通知",
+  "Status": "状态",
+  "Roles": "角色",
+  "IdentifyNo": "身份证号",
+  "USER": "普通用户",
+  "ADMIN": "管理员"
 }

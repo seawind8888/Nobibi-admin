@@ -19,7 +19,7 @@ class List extends PureComponent {
       confirm({
         title: i18n.t`Are you sure delete this record?`,
         onOk() {
-          onDeleteItem(record.id)
+          onDeleteItem(record._id)
         },
       })
     }
@@ -29,60 +29,74 @@ class List extends PureComponent {
     const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
 
     const columns = [
-      {
-        title: <Trans>Avatar</Trans>,
-        dataIndex: 'avatar',
-        key: 'avatar',
-        width: 72,
-        fixed: 'left',
-        render: text => <Avatar style={{ marginLeft: 8 }} src={text} />,
-      },
+      // {
+      //   title: <Trans>Avatar</Trans>,
+      //   dataIndex: 'avatar',
+      //   key: 'avatar',
+      //   width: 72,
+      //   fixed: 'left',
+      //   render: text => <Avatar style={{ marginLeft: 8 }} src={text} />,
+      // },
       {
         title: <Trans>Name</Trans>,
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
+        dataIndex: 'userCode',
+        key: 'userCode'
       },
       {
         title: <Trans>NickName</Trans>,
-        dataIndex: 'nickName',
-        key: 'nickName',
+        dataIndex: 'userName',
+        key: 'userName'
       },
-      {
-        title: <Trans>Age</Trans>,
-        dataIndex: 'age',
-        key: 'age',
-      },
-      {
-        title: <Trans>Gender</Trans>,
-        dataIndex: 'isMale',
-        key: 'isMale',
-        render: text => <span>{text ? 'Male' : 'Female'}</span>,
-      },
+      // {
+      //   title: <Trans>NickName</Trans>,
+      //   dataIndex: 'nickName',
+      //   key: 'nickName',
+      // },
+      // {
+      //   title: <Trans>Age</Trans>,
+      //   dataIndex: 'age',
+      //   key: 'age',
+      // },
+      // {
+      //   title: <Trans>Gender</Trans>,
+      //   dataIndex: 'isMale',
+      //   key: 'isMale',
+      //   render: text => <span>{text ? 'Male' : 'Female'}</span>,
+      // },
       {
         title: <Trans>Phone</Trans>,
-        dataIndex: 'phone',
-        key: 'phone',
+        dataIndex: 'phone'
       },
-      {
-        title: <Trans>Email</Trans>,
-        dataIndex: 'email',
-        key: 'email',
-      },
-      {
-        title: <Trans>Address</Trans>,
-        dataIndex: 'address',
-        key: 'address',
-      },
+      // {
+      //   title: <Trans>Email</Trans>,
+      //   dataIndex: 'email',
+      //   key: 'email',
+      // },
+      // {
+      //   title: <Trans>Address</Trans>,
+      //   dataIndex: 'address',
+      //   key: 'address',
+      // },
       {
         title: <Trans>CreateTime</Trans>,
         dataIndex: 'createTime',
         key: 'createTime',
       },
       {
+        title: <Trans>Status</Trans>,
+        dataIndex: 'status',
+        key: 'status',
+        render: text => <span>{text === '100'?'开启':'关闭'}</span>
+      },
+      {
+        title: <Trans>Roles</Trans>,
+        dataIndex: 'refUserRoleCode',
+        key: 'refUserRoleCode',
+        render: text => <span>{text === 'ADMIN'?'管理员':'普通用户'}</span>
+      },
+      {
         title: <Trans>Operation</Trans>,
         key: 'operation',
-        fixed: 'right',
         render: (text, record) => {
           return (
             <DropOption
@@ -104,12 +118,13 @@ class List extends PureComponent {
           ...tableProps.pagination,
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
+        style={{width:'100%'}}
         className={styles.table}
         bordered
-        scroll={{ x: 1200 }}
+        scroll={{ x: true }}
         columns={columns}
         simple
-        rowKey={record => record.id}
+        rowKey={record => record._id}
       />
     )
   }

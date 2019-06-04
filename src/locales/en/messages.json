@@ -50,5 +50,10 @@
   "Username": "Username",
   "Views": "Views",
   "Visibility": "Visibility",
-  "You have viewed all notifications.": "You have viewed all notifications."
+  "You have viewed all notifications.": "You have viewed all notifications.",
+  "Status": "Status",
+  "Roles": "Roles",
+  "IdentifyNo": "IdentifyNo",
+  "USER": "Customer",
+  "Admin": "Admin"
 }

@@ -68,7 +68,7 @@ class Login extends PureComponent {
               })(
                 <Input
                   onPressEnter={this.handleOk}
-                  placeholder={i18n.t`Username`}
+                  placeholder={i18n.t`Name`}
                 />
               )}
             </FormItem>
@@ -97,7 +97,7 @@ class Login extends PureComponent {
               </Button>
               <p>
                 <span>
-                  <Trans>Username</Trans>
+                  <Trans>Name</Trans>
                   ：guest
                 </span>
                 <span>

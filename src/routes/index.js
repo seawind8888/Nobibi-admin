@@ -32,7 +32,7 @@ export default  [
     'pt-br': {
       name: 'Posts'
     },
-    icon: 'reading',
+    icon: 'read',
     route: '/post',
   },
 ]

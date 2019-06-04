@@ -38,12 +38,12 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const data = yield call(queryUserList, payload)
+      const {data} = yield call(queryUserList, payload)
       if (data) {
         yield put({
           type: 'querySuccess',
           payload: {
-            list: data.data,
+            list: data.list,
             pagination: {
               current: Number(payload.page) || 1,
               pageSize: Number(payload.pageSize) || 10,
@@ -55,7 +55,7 @@ export default modelExtend(pageModel, {
     },
 
     *delete({ payload }, { call, put, select }) {
-      const data = yield call(removeUser, { id: payload })
+      const data = yield call(removeUser, { _id: payload })
       const { selectedRowKeys } = yield select(_ => _.user)
       if (data.success) {
         yield put({
