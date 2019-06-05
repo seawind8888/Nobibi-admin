@@ -11,13 +11,12 @@ import Filter from './components/Filter'
 import Modal from './components/Modal'
 
 @withI18n()
-@connect(({ post, loading }) => ({ post, loading }))
-class Post extends PureComponent {
+@connect(({ menu, loading }) => ({ menu, loading }))
+class Menu extends PureComponent {
     
     render() {
-        const { location, dispatch, post, loading, i18n } = this.props
+        const { location, dispatch, menu, loading, i18n } = this.props
         const { query, pathname } = location
-        
         const {
             list,
             pagination,
@@ -25,11 +24,11 @@ class Post extends PureComponent {
             modalVisible,
             modalType,
             selectedRowKeys,
-          } = post
+          } = menu
 
         const listProps = {
             dataSource: list,
-            loading: loading.effects['post/query'],
+            loading: loading.effects['menu/query'],
             pagination,
             onChange(page) {
                 handleRefresh({
@@ -39,7 +38,7 @@ class Post extends PureComponent {
             },
             onDeleteItem(id) {
                 dispatch({
-                type: 'post/delete',
+                type: 'menu/delete',
                 payload: id,
                 }).then(() => {
                 handleRefresh({
@@ -52,7 +51,7 @@ class Post extends PureComponent {
             },
             onEditItem(item) {
                 dispatch({
-                type: 'post/showModal',
+                type: 'menu/showModal',
                 payload: {
                     modalType: 'update',
                     currentItem: item,
@@ -63,7 +62,7 @@ class Post extends PureComponent {
                 selectedRowKeys,
                 onChange: keys => {
                 dispatch({
-                    type: 'post/updateState',
+                    type: 'menu/updateState',
                     payload: {
                     selectedRowKeys: keys,
                     },
@@ -106,14 +105,14 @@ class Post extends PureComponent {
             item: modalType === 'create' ? {} : currentItem,
             visible: modalVisible,
             maskClosable: false,
-            confirmLoading: loading.effects[`post/${modalType}`],
+            confirmLoading: loading.effects[`menu/${modalType}`],
             title: `${
-              modalType === 'create' ? i18n.t`Create Post` : i18n.t`Update Post`
+              modalType === 'create' ? i18n.t`Create Menu` : i18n.t`Update Menu`
             }`,
             centered: true,
             onOk(data) {
               dispatch({
-                type: `post/${modalType}`,
+                type: `menu/${modalType}`,
                 payload: data,
               }).then(() => {
                 handleRefresh()
@@ -121,13 +120,13 @@ class Post extends PureComponent {
             },
             onCancel() {
               dispatch({
-                type: 'post/hideModal',
+                type: 'menu/hideModal',
               })
             },
           }
         const handleDeleteItems = () => {
             dispatch({
-                type: 'post/multiDelete',
+                type: 'menu/multiDelete',
                 payload: {
                     ids: selectedRowKeys,
                 },
@@ -159,11 +158,11 @@ class Post extends PureComponent {
     }
 }
 
-Post.propTypes = {
-    post: PropTypes.object,
+Menu.propTypes = {
+    menu: PropTypes.object,
     location: PropTypes.object,
     dispatch: PropTypes.func,
     loading: PropTypes.object,
 }
 
-export default Post
+export default Menu

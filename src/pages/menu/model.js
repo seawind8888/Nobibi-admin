@@ -4,15 +4,15 @@ import api from 'api'
 import { pageModel } from 'utils/model'
 
 const {
-    queryPostList,
-    createPost,
-    removePost,
-    updatePost,
-    removePostList,
+    queryMenuList,
+    createMenu,
+    removeMenu,
+    updateMenu,
+    removeMenuList,
   } = api
 
 export default modelExtend(pageModel, {
-    namespace: 'post',
+    namespace: 'menu',
   
     state: {
         currentItem: {},
@@ -23,8 +23,8 @@ export default modelExtend(pageModel, {
     subscriptions: {
         setup({ dispatch, history }) {
           history.listen(location => {
-            if (pathMatchRegexp('/post', location.pathname)) {
-              const payload = location.query.page?{ page: location.query.page, pageSize: 10 }:{ page: 1, pageSize: 10 }
+            if (pathMatchRegexp('/menu', location.pathname)) {
+              const payload = location.query.page || { page: 1, pageSize: 10 }
               dispatch({
                 type: 'query',
                 payload,
@@ -35,7 +35,7 @@ export default modelExtend(pageModel, {
     },
     effects: {
         *query({ payload = {} }, { call, put }) {
-            const {data} = yield call(queryPostList, payload)
+            const {data} = yield call(queryMenuList, payload)
             if (data) {
                 yield put({
                     type: 'querySuccess',
@@ -51,8 +51,8 @@ export default modelExtend(pageModel, {
             }
         },
         *delete({ payload }, { call, put, select }) {
-            const data = yield call(removePost, { _id: payload })
-            const { selectedRowKeys } = yield select(_ => _.post)
+            const data = yield call(removeMenu, { _id: payload })
+            const { selectedRowKeys } = yield select(_ => _.menu)
             if (data.success) {
               yield put({
                 type: 'updateState',
@@ -65,7 +65,7 @@ export default modelExtend(pageModel, {
             }
           },
         *multiDelete({ payload }, { call, put }) {
-            const data = yield call(removePostList, payload)
+            const data = yield call(removeMenuList, payload)
             if (data.success) {
               yield put({ type: 'updateState', payload: { selectedRowKeys: [] } })
             } else {
@@ -73,7 +73,7 @@ export default modelExtend(pageModel, {
             }
         },
         *create({ payload }, { call, put }) {
-            const data = yield call(createPost, payload)
+            const data = yield call(createMenu, payload)
             if (data.success) {
               yield put({ type: 'hideModal' })
             } else {
@@ -82,9 +82,9 @@ export default modelExtend(pageModel, {
           },
       
           *update({ payload }, { select, call, put }) {
-            const id = yield select(({ post }) => post.currentItem.id)
-            const newPost = { ...payload, id }
-            const data = yield call(updatePost, newPost)
+            const id = yield select(({ menu }) => menu.currentItem.id)
+            const newMenu = { ...payload, id }
+            const data = yield call(updateMenu, newMenu)
             if (data.success) {
               yield put({ type: 'hideModal' })
             } else {

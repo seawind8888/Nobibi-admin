@@ -55,5 +55,6 @@
   "Roles": "Roles",
   "IdentifyNo": "IdentifyNo",
   "USER": "Customer",
-  "Admin": "Admin"
+  "Admin": "Admin",
+  "MenuName": "MenuName"
 }

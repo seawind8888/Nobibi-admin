@@ -27,8 +27,7 @@ class UserModal extends PureComponent {
         return
       }
       const data = {
-        ...getFieldsValue(),
-        password: md5(123456)
+        ...getFieldsValue()
         // key: item.key,
       }
       onOk(data)
@@ -45,48 +44,6 @@ class UserModal extends PureComponent {
         <FormItem label={i18n.t`Name`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('userCode', {
               initialValue: item.userCode?item.userCode:'',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem label={i18n.t`NickName`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('userName', {
-              initialValue: item.userName  || '',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem label={i18n.t`Email`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('email', {
-              initialValue: item.email  || '',
-              rules: [
-                {
-                  required: true
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem label={i18n.t`Phone`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('phone', {
-              initialValue: item.phone  || '',
-              rules: [
-                {
-                  required: true,
-                  pattern: /^1[34578]\d{9}$/,
-                  message: i18n.t`The input is not valid phone!`,
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem label={i18n.t`IdentifyNo`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('identifyNo', {
-              initialValue: item.identifyNo  || '',
               rules: [
                 {
                   required: true,
@@ -112,22 +69,6 @@ class UserModal extends PureComponent {
                 </Option>
               </Select>
             )}
-          </FormItem>
-          <FormItem label={i18n.t`Status`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('status', {
-              initialValue: item.status  || 'ENABLE',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(
-              <Radio.Group style={{width: 150}}>
-                <Radio value={'ENABLE'}>开启</Radio>
-                <Radio value={'CLOSE'}>关闭</Radio>
-              </Radio.Group>
-            )}
-           
           </FormItem>
           
          

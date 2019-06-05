@@ -11,9 +11,14 @@ export default {
   createUser: 'POST /user/create',
   removeUser: 'POST /user/remove',
   removeUserList: 'POST /users/delete',
-
-  queryPostList: '/posts',
-
-  queryDashboard: '/dashboard',
-  queryArticleList: "/article/list"
+  queryPostList: '/article/list',
+  createPost: 'POST /article/create',
+  removePost: 'POST /article/remove',
+  updatePost: 'POST /article/update',
+  queryMenuList: '/menu/list',
+  createMenu: 'POST /menu/create',
+  removeMenu: 'POST /menu/remove',
+  updateMenu: 'POST /menu/update',
+  removeMenuList: '',
+  queryCategory: '/category/list',
 }

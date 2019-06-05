@@ -54,5 +54,18 @@
   "Roles": "角色",
   "IdentifyNo": "身份证号",
   "USER": "普通用户",
-  "ADMIN": "管理员"
+  "ADMIN": "管理员",
+  "ID": "序号",
+  "PostTitle": "文章标题",
+  "PostAbstract": "文章摘要",
+  "PostAuther": "文章作者",
+  "PostCategory": "文章分类",
+  "PostTags": "文章标签",
+  "PostStatus": "文章状态",
+  "MenuName": "菜单名称",
+  "MenuId": "菜单编码",
+  "MenuLevel": "菜单级别",
+  "MenuPlatform": "所属平台",
+  "MenuFront": "前台",
+  "MenuBack": "后台"
 }

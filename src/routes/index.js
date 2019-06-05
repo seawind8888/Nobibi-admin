@@ -35,4 +35,16 @@ export default  [
     icon: 'read',
     route: '/post',
   },
+  {
+    id: '4',
+    name: 'Menu',
+    zh: {
+      name: '菜单管理'
+    },
+    'pt-br': {
+      name: 'Usuário'
+    },
+    icon: 'menu',
+    route: '/menu',
+  },
 ]
