@@ -25,9 +25,9 @@ export default  [
   },
   {
     id: '3',
-    name: 'Article',
+    name: 'Topic',
     zh: {
-      name: '文章管理'
+      name: '话题管理'
     },
     'pt-br': {
       name: 'Posts'
@@ -37,6 +37,18 @@ export default  [
   },
   {
     id: '4',
+    name: 'category',
+    zh: {
+      name: '分类管理'
+    },
+    'pt-br': {
+      name: 'Usuário'
+    },
+    icon: 'apartment',
+    route: '/category',
+  },
+  {
+    id: '5',
     name: 'Menu',
     zh: {
       name: '菜单管理'

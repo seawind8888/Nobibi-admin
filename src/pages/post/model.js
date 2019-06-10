@@ -8,7 +8,7 @@ const {
     createPost,
     removePost,
     updatePost,
-    removePostList,
+    removePostList
   } = api
 
 export default modelExtend(pageModel, {
@@ -18,16 +18,20 @@ export default modelExtend(pageModel, {
         currentItem: {},
         modalVisible: false,
         modalType: 'create',
-        selectedRowKeys: []
+        selectedRowKeys: [],
+        categoryList: []
     },
     subscriptions: {
         setup({ dispatch, history }) {
           history.listen(location => {
             if (pathMatchRegexp('/post', location.pathname)) {
-              const payload = location.query.page?{ page: location.query.page, pageSize: 10 }:{ page: 1, pageSize: 10 }
+              const payload = location.query || { page: 1, pageSize: 10 }
               dispatch({
                 type: 'query',
                 payload,
+              })
+              dispatch({
+                type: 'queryUserSelect'
               })
             }
           })
@@ -50,6 +54,18 @@ export default modelExtend(pageModel, {
                 })
             }
         },
+        // *queryUserSelect({ payload = {}}, { call, put }) {
+        //   const {data} = yield call(queryUserList, payload)
+        //   if (data) {
+        //     yield put({
+        //       type: 'querySelectSuccess',
+        //       payload: {
+        //         userList: data.list
+        //       },
+        //     })
+        //   }
+        // },
+       
         *delete({ payload }, { call, put, select }) {
             const data = yield call(removePost, { _id: payload })
             const { selectedRowKeys } = yield select(_ => _.post)
@@ -93,6 +109,9 @@ export default modelExtend(pageModel, {
           },
     },
     reducers: {
+        querySelectSuccess(state, { payload }) {
+          return { ...state, ...payload }
+        },
         showModal(state, { payload }) {
           return { ...state, ...payload, modalVisible: true }
         },

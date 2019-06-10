@@ -1,6 +1,6 @@
 /*
     ## Address 字典数据
-    字典数据来源 http://www.atatech.org/articles/30028?rnd=254259856
+    字典数据来源 http://www.atatech.org/s/30028?rnd=254259856
     国标 省（市）级行政区划码表
     华北   北京市 天津市 河北省 山西省 内蒙古自治区
     东北   辽宁省 吉林省 黑龙江省

@@ -11,11 +11,11 @@ import Filter from './components/Filter'
 import Modal from './components/Modal'
 
 @withI18n()
-@connect(({ post, loading }) => ({ post, loading }))
+@connect(({ app, post, loading }) => ({ app, post, loading }))
 class Post extends PureComponent {
     
     render() {
-        const { location, dispatch, post, loading, i18n } = this.props
+        const { location, dispatch, post, loading, i18n, app } = this.props
         const { query, pathname } = location
         
         const {
@@ -25,7 +25,12 @@ class Post extends PureComponent {
             modalVisible,
             modalType,
             selectedRowKeys,
+            
           } = post
+        const {
+          userSelectList,
+          categoryList
+        } = app
 
         const listProps = {
             dataSource: list,
@@ -84,6 +89,7 @@ class Post extends PureComponent {
             })
           }
           const filterProps = {
+            userSelectList,
             filter: {
               ...query,
             },
@@ -95,7 +101,7 @@ class Post extends PureComponent {
             },
             onAdd() {
               dispatch({
-                type: 'user/showModal',
+                type: 'post/showModal',
                 payload: {
                   modalType: 'create',
                 },
@@ -103,6 +109,9 @@ class Post extends PureComponent {
             },
           }
         const modalProps = {
+            userSelectList,
+            categoryList,
+            width: 1000,
             item: modalType === 'create' ? {} : currentItem,
             visible: modalVisible,
             maskClosable: false,
@@ -124,6 +133,14 @@ class Post extends PureComponent {
                 type: 'post/hideModal',
               })
             },
+            onSelectUser(userCode) {
+              dispatch({
+                type: 'post/queryCategorySelect',
+                payload: {
+                  userCode,
+                }
+              })
+            }
           }
         const handleDeleteItems = () => {
             dispatch({

@@ -11,7 +11,7 @@ import config from 'config'
 import list from '../routes'
 import Cookies from 'js-cookie'
 
-const { queryRouteList, logoutUser, queryUserInfo } = api
+const { queryRouteList, logoutUser, queryUserInfo, queryUserList, queryCategoryList } = api
 
 export default {
   namespace: 'app',
@@ -20,6 +20,8 @@ export default {
     permissions: {
       visit: [],
     },
+    userSelectList: [],
+    categoryList: [],
     routeList: [
       {
         id: '1',
@@ -72,6 +74,8 @@ export default {
 
     setup({ dispatch }) {
       dispatch({ type: 'query' })
+      dispatch({ type: 'queryUserSelect'})
+      dispatch({ type: 'queryCategorySelect'})
     },
   },
   effects: {
@@ -122,6 +126,28 @@ export default {
           search: stringify({
             from: locationPathname,
           }),
+        })
+      }
+    },
+    *queryUserSelect({ payload = {}}, { call, put }) {
+      const {data} = yield call(queryUserList, payload)
+      if (data) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            userSelectList: data.list
+          },
+        })
+      }
+    },
+    *queryCategorySelect({ payload = {}}, { call, put }){
+      const {data} = yield call(queryCategoryList, payload)
+      if (data) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            categoryList: data.list
+          },
         })
       }
     },

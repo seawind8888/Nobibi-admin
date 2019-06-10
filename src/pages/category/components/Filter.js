@@ -76,11 +76,15 @@ class Filter extends Component {
     fields = this.handleFields(fields)
     onFilterChange(fields)
   }
+  handleChangeRoles = (key, values) => {
+    const { form, onFilterChange } = this.props
+    console.log(key +';'+ values)
+  }
 
   render() {
-    const { onAdd, filter, form, i18n, userSelectList } = this.props
+    const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
-    const { topicTitle, userCode } = filter
+    const { categoryName } = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {
@@ -93,25 +97,11 @@ class Filter extends Component {
     return (
       <Row gutter={24}>
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('topicTitle', { initialValue: topicTitle })(
+          {getFieldDecorator('categoryName', { initialValue: categoryName || null })(
             <Search
-              placeholder={i18n.t`Search Post Title`}
+              placeholder={i18n.t`Search CategoryName`}
               onSearch={this.handleSubmit}
             />
-          )}
-        </Col>
-        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('userCode', { initialValue: userCode })(
-           <Select 
-            style={{width: '200px'}}
-            placeholder={i18n.t`PostAuther`}
-            allowClear>
-            {userSelectList.map(item => (
-              <Option value={item.userCode} key={item._id}>
-                {item.userCode}
-              </Option>
-            ))}
-          </Select>
           )}
         </Col>
         <Col

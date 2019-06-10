@@ -24,12 +24,12 @@ class List extends PureComponent {
     }
   }
 
-  articleStatus = (str = "") => {
+  topicStatus = (str = "") => {
       switch (str) {
-          case "100":
+          case "PUBLISH":
               return '已发布'
-          case "500":
-              return '未发布'
+          case "DRAFT":
+              return '草稿'
           default:
               return ' '
       }
@@ -46,8 +46,8 @@ class List extends PureComponent {
       },
       {
         title: <Trans>PostTitle</Trans>,
-        dataIndex: 'articleTitle',
-        key: 'articleTitle'
+        dataIndex: 'topicTitle',
+        key: 'topicTitle'
       },
       {
         title: <Trans>PostAuther</Trans>,
@@ -55,18 +55,13 @@ class List extends PureComponent {
         key: 'userCode'
       },
       {
-        title: <Trans>PostAbstract</Trans>,
-        dataIndex: 'abstract',
-        key: 'abstract'
-      },
-      {
         title: <Trans>PostStatus</Trans>,
         dataIndex: 'status',
         key: 'status',
         render: text => 
           <span>
-            <Tag color={text === '100'?'green':'red'}>
-              {this.articleStatus(text)}
+            <Tag color={text === 'PUBLISH'?'green':'red'}>
+              {this.topicStatus(text)}
             </Tag>
           </span>
       },
@@ -89,26 +84,6 @@ class List extends PureComponent {
             })}
           </span>
         
-      },
-      {
-        title: 'PostTags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-          <span>
-            {tags.map(tag => {
-              let color = tag.length > 5 ? 'geekblue' : 'green';
-              if (tag === 'loser') {
-                color = 'volcano';
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag}
-                </Tag>
-              );
-            })}
-          </span>
-        ),
       },
       {
         title: <Trans>CreateTime</Trans>,

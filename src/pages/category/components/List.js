@@ -5,7 +5,6 @@ import { DropOption } from 'components'
 import { Trans, withI18n } from '@lingui/react'
 import Link from 'umi/link'
 import styles from './List.less'
-
 const { confirm } = Modal
 
 @withI18n()
@@ -30,18 +29,14 @@ class List extends PureComponent {
 
     const columns = [
       {
-        title: <Trans>Name</Trans>,
-        dataIndex: 'userCode',
-        key: 'userCode'
+        title: <Trans>CategoryCode</Trans>,
+        dataIndex: '_id',
+        key: '_id'
       },
       {
-        title: <Trans>NickName</Trans>,
-        dataIndex: 'userName',
-        key: 'userName'
-      },
-      {
-        title: <Trans>Email</Trans>,
-        dataIndex: 'email'
+        title: <Trans>CategoryName</Trans>,
+        dataIndex: 'categoryName',
+        key: 'categoryName'
       },
       {
         title: <Trans>CreateTime</Trans>,
@@ -49,16 +44,9 @@ class List extends PureComponent {
         key: 'createTime',
       },
       {
-        title: <Trans>Status</Trans>,
-        dataIndex: 'status',
-        key: 'status',
-        render: text => <span>{text === '100'?'开启':'关闭'}</span>
-      },
-      {
-        title: <Trans>Roles</Trans>,
-        dataIndex: 'refUserRoleCode',
-        key: 'refUserRoleCode',
-        render: text => <span>{text === 'ADMIN'?'管理员':'普通用户'}</span>
+        title: <Trans>CategoryUser</Trans>,
+        dataIndex: 'categoryUser',
+        key: 'categoryUser',
       },
       {
         title: <Trans>Operation</Trans>,

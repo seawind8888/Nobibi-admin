@@ -72,28 +72,6 @@ class UserModal extends PureComponent {
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem label={i18n.t`Phone`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('phone', {
-              initialValue: item.phone  || '',
-              rules: [
-                {
-                  required: true,
-                  pattern: /^1[34578]\d{9}$/,
-                  message: i18n.t`The input is not valid phone!`,
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem label={i18n.t`IdentifyNo`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('identifyNo', {
-              initialValue: item.identifyNo  || '',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
           <FormItem label={i18n.t`Roles`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('refUserRoleCode', {
               initialValue: item.refUserRoleCode  || 'USER',
