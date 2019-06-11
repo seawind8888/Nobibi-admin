@@ -49,14 +49,27 @@ export default  [
   },
   {
     id: '5',
-    name: 'Menu',
+    name: 'Role',
     zh: {
-      name: '菜单管理'
+      name: '角色管理'
     },
     'pt-br': {
       name: 'Usuário'
     },
-    icon: 'menu',
-    route: '/menu',
+    icon: 'team',
+    route: '/role',
   },
+  {
+    id: '6',
+    name: 'Comment',
+    zh: {
+      name: '评论管理'
+    },
+    'pt-br': {
+      name: 'Usuário'
+    },
+    icon: 'message',
+    route: '/comment',
+  },
+  
 ]

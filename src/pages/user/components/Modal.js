@@ -28,6 +28,7 @@ class UserModal extends PureComponent {
       }
       const data = {
         ...getFieldsValue(),
+        _id: item._id,
         password: md5(123456)
         // key: item.key,
       }

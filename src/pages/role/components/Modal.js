@@ -15,7 +15,7 @@ const formItemLayout = {
 }
 @withI18n()
 @Form.create()
-class CategoryModal extends PureComponent {
+class RoleModal extends PureComponent {
   handleOk = () => {
     const { item = {}, onOk, form } = this.props
     const { validateFields, getFieldsValue } = form
@@ -26,8 +26,7 @@ class CategoryModal extends PureComponent {
         return
       }
       const data = {
-        ...getFieldsValue(),
-        _id: item._id
+        ...getFieldsValue()
         // key: item.key,
       }
       onOk(data)
@@ -41,8 +40,8 @@ class CategoryModal extends PureComponent {
     return (
       <Modal {...modalProps} onOk={this.handleOk}>
         <Form layout="horizontal">
-        <FormItem label={i18n.t`CategoryName`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('categoryName', {
+        <FormItem label={i18n.t`RoleName`} hasFeedback {...formItemLayout}>
+            {getFieldDecorator('roleName', {
               initialValue: item.categoryName,
               rules: [
                 {

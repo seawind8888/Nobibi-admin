@@ -26,8 +26,7 @@ class CategoryModal extends PureComponent {
         return
       }
       const data = {
-        ...getFieldsValue(),
-        _id: item._id
+        ...getFieldsValue()
         // key: item.key,
       }
       onOk(data)

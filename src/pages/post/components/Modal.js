@@ -30,6 +30,7 @@ class PostModal extends PureComponent {
         // key: item.key,
       }
       data.content = data.content.toHTML()
+      data._id = item._id
       onOk(data)
     })
   }
