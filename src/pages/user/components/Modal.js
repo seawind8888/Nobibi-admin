@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
 import { Trans, withI18n } from '@lingui/react'
-import city from 'utils/city'
 import md5 from 'md5'
+import { find } from 'lodash'
 
 const FormItem = Form.Item
 
@@ -18,10 +18,12 @@ const formItemLayout = {
 @withI18n()
 @Form.create()
 class UserModal extends PureComponent {
+  state = {
+    roleSelectPermission: {}
+  }
   handleOk = () => {
     const { item = {}, onOk, form } = this.props
     const { validateFields, getFieldsValue } = form
-
     validateFields(errors => {
       if (errors) {
         return
@@ -29,15 +31,22 @@ class UserModal extends PureComponent {
       const data = {
         ...getFieldsValue(),
         _id: item._id,
-        password: md5(123456)
+        controlCode: window.localStorage.getItem('controlCode'),
+        visit: this.state.roleSelectPermission
         // key: item.key,
       }
+      data.password = md5(data.password)
       onOk(data)
     })
   }
+  selectRoles = (rolesName) => {
+    const { roleSelectList } = this.props
+    const roles = find(roleSelectList, ['roleName', rolesName])
+    this.state.roleSelectPermission = roles.permission
+  }
 
   render() {
-    const { item = {}, onOk, form, i18n, ...modalProps } = this.props
+    const { item = {}, onOk, form, i18n, roleSelectList, ...modalProps } = this.props
     const { getFieldDecorator } = form
 
     return (
@@ -52,6 +61,16 @@ class UserModal extends PureComponent {
                 },
               ],
             })(<Input />)}
+          </FormItem>
+          <FormItem label={i18n.t`Password`} hasFeedback {...formItemLayout}>
+            {getFieldDecorator('password', {
+              initialValue: item.password  || '',
+              rules: [
+                {
+                  required: true,
+                },
+              ],
+            })(<Input.Password password />)}
           </FormItem>
           <FormItem label={i18n.t`NickName`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('userName', {
@@ -75,20 +94,20 @@ class UserModal extends PureComponent {
           </FormItem>
           <FormItem label={i18n.t`Roles`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('refUserRoleCode', {
-              initialValue: item.refUserRoleCode  || 'USER',
+              initialValue: item.refUserRoleCode,
               rules: [
                 {
                   required: true,
                 },
               ],
             })(
-              <Select>
-                <Option value='USER'>
-                  <Trans>USER</Trans>
-                </Option>
-                <Option value='ADMIN'>
-                  <Trans>ADMIN</Trans>
-                </Option>
+              <Select
+                onChange={this.selectRoles}>
+                {roleSelectList.map(e => (
+                  <Option key={e.roleName}>
+                    {e.roleName}
+                  </Option>
+                ))}
               </Select>
             )}
           </FormItem>

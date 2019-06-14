@@ -29,14 +29,9 @@ class List extends PureComponent {
 
     const columns = [
       {
-        title: <Trans>CategoryCode</Trans>,
-        dataIndex: '_id',
-        key: '_id'
-      },
-      {
-        title: <Trans>CategoryName</Trans>,
-        dataIndex: 'categoryName',
-        key: 'categoryName'
+        title: <Trans>CommentUser</Trans>,
+        dataIndex: 'userCode',
+        key: 'userCode'
       },
       {
         title: <Trans>CreateTime</Trans>,
@@ -44,9 +39,24 @@ class List extends PureComponent {
         key: 'createTime',
       },
       {
-        title: <Trans>CategoryUser</Trans>,
-        dataIndex: 'categoryUser',
-        key: 'categoryUser',
+        title: <Trans>CommentTopic</Trans>,
+        dataIndex: 'topicTitle',
+        key: 'topicTitle',
+      },
+      {
+        title: <Trans>CommentContent</Trans>,
+        dataIndex: 'content',
+        key: 'content',
+      },
+      {
+        title: <Trans>CommentSupport</Trans>,
+        dataIndex: 'supNum',
+        key: 'supNum',
+      },
+      {
+        title: <Trans>CommentNoSupport</Trans>,
+        dataIndex: 'noSupNum',
+        key: 'noSupNum',
       },
       {
         title: <Trans>Operation</Trans>,

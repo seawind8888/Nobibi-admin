@@ -1,18 +1,6 @@
 export default  [
   {
-    id: '1',
-    icon: 'dashboard',
-    name: 'Dashboard',
-    zh: {
-      name: '仪表盘'
-    },
-    'pt-br': {
-      name: 'Dashboard'
-    },
-    route: '/dashboard',
-  },
-  {
-    id: '2',
+    id: '0',
     name: 'Users',
     zh: {
       name: '用户管理'
@@ -24,7 +12,7 @@ export default  [
     route: '/user',
   },
   {
-    id: '3',
+    id: '1',
     name: 'Topic',
     zh: {
       name: '话题管理'
@@ -36,7 +24,7 @@ export default  [
     route: '/post',
   },
   {
-    id: '4',
+    id: '2',
     name: 'category',
     zh: {
       name: '分类管理'
@@ -48,7 +36,7 @@ export default  [
     route: '/category',
   },
   {
-    id: '5',
+    id: '3',
     name: 'Role',
     zh: {
       name: '角色管理'
@@ -60,7 +48,7 @@ export default  [
     route: '/role',
   },
   {
-    id: '6',
+    id: '4',
     name: 'Comment',
     zh: {
       name: '评论管理'

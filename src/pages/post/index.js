@@ -146,8 +146,15 @@ class Post extends PureComponent {
             dispatch({
                 type: 'post/multiDelete',
                 payload: {
-                    ids: selectedRowKeys,
+                    _id: selectedRowKeys,
                 },
+            }).then(() => {
+              handleRefresh({
+                page:
+                  list.length === selectedRowKeys.length && pagination.current > 1
+                    ? pagination.current - 1
+                    : pagination.current,
+              })
             })
         }
         return (

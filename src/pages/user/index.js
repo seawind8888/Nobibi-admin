@@ -11,10 +11,10 @@ import Filter from './components/Filter'
 import Modal from './components/Modal'
 
 @withI18n()
-@connect(({ user, loading }) => ({ user, loading }))
+@connect(({ user, app, loading }) => ({ user, app, loading }))
 class User extends PureComponent {
   render() {
-    const { location, dispatch, user, loading, i18n } = this.props
+    const { location, dispatch, user, loading, i18n, app } = this.props
     const { query, pathname } = location
     const {
       list,
@@ -24,6 +24,11 @@ class User extends PureComponent {
       modalType,
       selectedRowKeys,
     } = user
+
+
+    const {
+      roleSelectList
+    } = app
 
     const handleRefresh = newQuery => {
       router.push({
@@ -39,6 +44,7 @@ class User extends PureComponent {
     }
 
     const modalProps = {
+      roleSelectList,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,
       maskClosable: false,
@@ -108,6 +114,7 @@ class User extends PureComponent {
     }
 
     const filterProps = {
+      roleSelectList,
       filter: {
         ...query,
       },
@@ -131,7 +138,8 @@ class User extends PureComponent {
       dispatch({
         type: 'user/multiDelete',
         payload: {
-          ids: selectedRowKeys,
+          _id: selectedRowKeys,
+          controlCode: window.localStorage.getItem('controlCode')
         },
       }).then(() => {
         handleRefresh({

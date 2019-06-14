@@ -5,26 +5,21 @@ import api from 'api'
 import { pageModel } from 'utils/model'
 
 const {
-  queryCategoryList,
-  createCategory,
-  removeCategory,
-  updateCategory
+  queryCommentList,
+  removeComment,
 } = api
 
 export default modelExtend(pageModel, {
-  namespace: 'category',
+  namespace: 'comment',
 
   state: {
-    currentItem: {},
-    modalVisible: false,
-    modalType: 'create',
     selectedRowKeys: [],
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
-        if (pathMatchRegexp('/category', location.pathname)) {
+        if (pathMatchRegexp('/comment', location.pathname)) {
           const payload = location.query || { page: 1, pageSize: 10 }
           dispatch({
             type: 'query',
@@ -37,7 +32,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const {data} = yield call(queryCategoryList, payload)
+      const {data} = yield call(queryCommentList, payload)
       if (data) {
         yield put({
           type: 'querySuccess',
@@ -54,8 +49,8 @@ export default modelExtend(pageModel, {
     },
 
     *delete({ payload }, { call, put, select }) {
-      const data = yield call(removeCategory, { _id: payload })
-      const { selectedRowKeys } = yield select(_ => _.category)
+      const data = yield call(removeComment, { _id: payload })
+      const { selectedRowKeys } = yield select(_ => _.comment)
       if (data.success) {
         yield put({
           type: 'updateState',
@@ -69,42 +64,12 @@ export default modelExtend(pageModel, {
     },
 
     *multiDelete({ payload }, { call, put }) {
-      const data = yield call(removeCategoryList, payload)
+      const data = yield call(removeComment, payload)
       if (data.success) {
         yield put({ type: 'updateState', payload: { selectedRowKeys: [] } })
       } else {
         throw data
       }
-    },
-
-    *create({ payload }, { call, put }) {
-      const data = yield call(createCategory, payload)
-      if (data.success) {
-        yield put({ type: 'hideModal' })
-      } else {
-        throw data
-      }
-    },
-
-    *update({ payload }, { select, call, put }) {
-      const id = yield select(({ category }) => category.currentItem.id)
-      const newCategory = { ...payload, id }
-      const data = yield call(updateCategory, newCategory)
-      if (data.success) {
-        yield put({ type: 'hideModal' })
-      } else {
-        throw data
-      }
-    },
-  },
-
-  reducers: {
-    showModal(state, { payload }) {
-      return { ...state, ...payload, modalVisible: true }
-    },
-
-    hideModal(state) {
-      return { ...state, modalVisible: false }
     },
   },
 })

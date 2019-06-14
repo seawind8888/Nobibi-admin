@@ -136,7 +136,7 @@ class Category extends PureComponent {
       dispatch({
         type: 'category/multiDelete',
         payload: {
-          ids: selectedRowKeys,
+          _id: selectedRowKeys,
         },
       }).then(() => {
         handleRefresh({

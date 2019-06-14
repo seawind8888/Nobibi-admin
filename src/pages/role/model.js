@@ -5,7 +5,7 @@ import api from 'api'
 import { pageModel } from 'utils/model'
 
 const {
-  queryRolesList,
+  queryRoleList,
   createRole,
   removeRole,
   updateRole
@@ -16,6 +16,7 @@ export default modelExtend(pageModel, {
 
   state: {
     currentItem: {},
+    menuList: ['用户管理','角色管理','分类管理','主题管理','评论管理'],
     modalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
@@ -69,7 +70,7 @@ export default modelExtend(pageModel, {
     },
 
     *multiDelete({ payload }, { call, put }) {
-      const data = yield call(removeRoleList, payload)
+      const data = yield call(removeRole, payload)
       if (data.success) {
         yield put({ type: 'updateState', payload: { selectedRowKeys: [] } })
       } else {

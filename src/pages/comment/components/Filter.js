@@ -99,7 +99,7 @@ class Filter extends Component {
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
           {getFieldDecorator('categoryName', { initialValue: categoryName || null })(
             <Search
-              placeholder={i18n.t`Search CategoryName`}
+              placeholder={i18n.t`Search CommentName`}
               onSearch={this.handleSubmit}
             />
           )}
@@ -144,9 +144,6 @@ class Filter extends Component {
                 <Trans>Reset</Trans>
               </Button>
             </div>
-            <Button type="ghost" onClick={onAdd}>
-              <Trans>Create</Trans>
-            </Button>
           </Row>
         </Col>
       </Row>

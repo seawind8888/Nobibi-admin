@@ -8,26 +8,18 @@ import { Page } from 'components'
 import { stringify } from 'qs'
 import List from './components/List'
 import Filter from './components/Filter'
-import Modal from './components/Modal'
 
 @withI18n()
-@connect(({ app, category, loading }) => ({ app, category, loading }))
-class Category extends PureComponent {
+@connect(({ app, comment, loading }) => ({ app, comment, loading }))
+class Comment extends PureComponent {
   render() {
-    const { location, dispatch, category, loading, i18n, app } = this.props
+    const { location, dispatch, comment, loading, app } = this.props
     const { query, pathname } = location
     const {
       list,
       pagination,
-      currentItem,
-      modalVisible,
-      modalType,
       selectedRowKeys,
-    } = category
-
-    const {
-      userSelectList
-    } = app
+    } = comment
 
     const handleRefresh = newQuery => {
       router.push({
@@ -42,34 +34,10 @@ class Category extends PureComponent {
       })
     }
 
-    const modalProps = {
-      userSelectList,
-      item: modalType === 'create' ? {} : currentItem,
-      visible: modalVisible,
-      maskClosable: false,
-      confirmLoading: loading.effects[`category/${modalType}`],
-      title: `${
-        modalType === 'create' ? i18n.t`Create Category` : i18n.t`Update Category`
-      }`,
-      centered: true,
-      onOk(data) {
-        dispatch({
-          type: `category/${modalType}`,
-          payload: data,
-        }).then(() => {
-          handleRefresh()
-        })
-      },
-      onCancel() {
-        dispatch({
-          type: 'category/hideModal',
-        })
-      },
-    }
 
     const listProps = {
       dataSource: list,
-      loading: loading.effects['category/query'],
+      loading: loading.effects['comment/query'],
       pagination,
       onChange(page) {
         handleRefresh({
@@ -79,7 +47,7 @@ class Category extends PureComponent {
       },
       onDeleteItem(id) {
         dispatch({
-          type: 'category/delete',
+          type: 'comment/delete',
           payload: id,
         }).then(() => {
           handleRefresh({
@@ -90,20 +58,11 @@ class Category extends PureComponent {
           })
         })
       },
-      onEditItem(item) {
-        dispatch({
-          type: 'category/showModal',
-          payload: {
-            modalType: 'update',
-            currentItem: item,
-          },
-        })
-      },
       rowSelection: {
         selectedRowKeys,
         onChange: keys => {
           dispatch({
-            type: 'category/updateState',
+            type: 'comment/updateState',
             payload: {
               selectedRowKeys: keys,
             },
@@ -122,21 +81,13 @@ class Category extends PureComponent {
           page: 1,
         })
       },
-      onAdd() {
-        dispatch({
-          type: 'category/showModal',
-          payload: {
-            modalType: 'create',
-          },
-        })
-      },
     }
 
     const handleDeleteItems = () => {
       dispatch({
-        type: 'category/multiDelete',
+        type: 'comment/multiDelete',
         payload: {
-          ids: selectedRowKeys,
+          _id: selectedRowKeys,
         },
       }).then(() => {
         handleRefresh({
@@ -168,17 +119,16 @@ class Category extends PureComponent {
           </Row>
         )}
         <List {...listProps} />
-        {modalVisible && <Modal {...modalProps} />}
       </Page>
     )
   }
 }
 
-Category.propTypes = {
-  category: PropTypes.object,
+Comment.propTypes = {
+  comment: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
   loading: PropTypes.object,
 }
 
-export default Category
+export default Comment

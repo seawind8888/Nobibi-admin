@@ -47,7 +47,7 @@ class PrimaryLayout extends PureComponent {
   render() {
     const { app, location, dispatch, children } = this.props
     const {
-      user,
+      userInfo,
       theme,
       routeList,
       collapsed,
@@ -70,7 +70,7 @@ class PrimaryLayout extends PureComponent {
             }
           })
         : routeList
-
+    console.log('routeList',routeList)
     // Find a route that matches the pathname.
     const currentRoute = newRouteList.find(
       _ => _.route && pathMatchRegexp(_.route, location.pathname)
@@ -89,8 +89,8 @@ class PrimaryLayout extends PureComponent {
       collapsed,
       notifications,
       onCollapseChange,
-      avatar: user.avatar,
-      username: user.username,
+      avatar: userInfo.avatar,
+      username: userInfo.username,
       fixed: config.fixedHeader,
       onAllNotificationsRead() {
         dispatch({ type: 'app/allNotificationsRead' })

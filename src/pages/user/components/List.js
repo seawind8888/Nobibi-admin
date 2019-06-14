@@ -19,7 +19,10 @@ class List extends PureComponent {
       confirm({
         title: i18n.t`Are you sure delete this record?`,
         onOk() {
-          onDeleteItem(record._id)
+          onDeleteItem({
+            _id: record._id,
+            controlCode: window.localStorage.getItem('controlCode'),
+          })
         },
       })
     }
@@ -58,7 +61,7 @@ class List extends PureComponent {
         title: <Trans>Roles</Trans>,
         dataIndex: 'refUserRoleCode',
         key: 'refUserRoleCode',
-        render: text => <span>{text === 'ADMIN'?'管理员':'普通用户'}</span>
+        render: text => <span>{text}</span>
       },
       {
         title: <Trans>Operation</Trans>,

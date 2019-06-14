@@ -8,8 +8,7 @@ const {
   queryUserList,
   createUser,
   removeUser,
-  updateUser,
-  removeUserList,
+  updateUser
 } = api
 
 export default modelExtend(pageModel, {
@@ -55,7 +54,7 @@ export default modelExtend(pageModel, {
     },
 
     *delete({ payload }, { call, put, select }) {
-      const data = yield call(removeUser, { _id: payload })
+      const data = yield call(removeUser, payload )
       const { selectedRowKeys } = yield select(_ => _.user)
       if (data.success) {
         yield put({
@@ -70,7 +69,7 @@ export default modelExtend(pageModel, {
     },
 
     *multiDelete({ payload }, { call, put }) {
-      const data = yield call(removeUserList, payload)
+      const data = yield call(removeUser, payload)
       if (data.success) {
         yield put({ type: 'updateState', payload: { selectedRowKeys: [] } })
       } else {

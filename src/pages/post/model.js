@@ -30,9 +30,6 @@ export default modelExtend(pageModel, {
                 type: 'query',
                 payload,
               })
-              dispatch({
-                type: 'queryUserSelect'
-              })
             }
           })
         },
@@ -54,17 +51,6 @@ export default modelExtend(pageModel, {
                 })
             }
         },
-        // *queryUserSelect({ payload = {}}, { call, put }) {
-        //   const {data} = yield call(queryUserList, payload)
-        //   if (data) {
-        //     yield put({
-        //       type: 'querySelectSuccess',
-        //       payload: {
-        //         userList: data.list
-        //       },
-        //     })
-        //   }
-        // },
        
         *delete({ payload }, { call, put, select }) {
             const data = yield call(removePost, { _id: payload })
@@ -81,7 +67,7 @@ export default modelExtend(pageModel, {
             }
           },
         *multiDelete({ payload }, { call, put }) {
-            const data = yield call(removePostList, payload)
+            const data = yield call(removePost, payload)
             if (data.success) {
               yield put({ type: 'updateState', payload: { selectedRowKeys: [] } })
             } else {

@@ -5,7 +5,6 @@ import moment from 'moment'
 import { FilterItem } from 'components'
 import { Trans, withI18n } from '@lingui/react'
 import { Form, Button, Row, Col, DatePicker, Input, Select } from 'antd'
-import city from 'utils/city'
 
 const { Search } = Input
 const { RangePicker } = DatePicker
@@ -78,12 +77,12 @@ class Filter extends Component {
     onFilterChange(fields)
   }
   handleChangeRoles = (key, values) => {
-    const { form, onFilterChange } = this.props
-    console.log(key +';'+ values)
+    // const { form, onFilterChange } = this.props
+    // console.log(key +';'+ values)
   }
 
   render() {
-    const { onAdd, filter, form, i18n } = this.props
+    const { onAdd, filter, form, i18n, roleSelectList } = this.props
     const { getFieldDecorator } = form
     const { userCode, refUserRoleCode } = filter
 
@@ -113,12 +112,11 @@ class Filter extends Component {
               placeholder={i18n.t`Roles`}
               allowClear
             >
-              <Option value="ADMIN">
-                <Trans>ADMIN</Trans>
-              </Option>
-              <Option value="USER">
-                <Trans>USER</Trans>
-              </Option>
+              {roleSelectList.map(e => (
+                <Option key={e.roleName}>
+                  {e.roleName}
+                </Option>
+              ))}
             </Select>
           )}
         </Col>

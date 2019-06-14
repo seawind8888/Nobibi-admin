@@ -8,28 +8,30 @@ import { queryLayout, pathMatchRegexp } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
-import list from '../routes'
+import routes from '../routes'
 import Cookies from 'js-cookie'
+import { find } from 'lodash'
 
-const { queryRouteList, logoutUser, queryUserInfo, queryUserList, queryCategoryList } = api
+const { queryRouteList, logoutUser, queryUserInfo, queryUserList, queryCategoryList, queryRoleList } = api
 
 export default {
   namespace: 'app',
   state: {
-    user: {},
+    userInfo: {},
     permissions: {
       visit: [],
     },
     userSelectList: [],
     categoryList: [],
+    roleSelectList: [],
     routeList: [
-      {
-        id: '1',
-        icon: 'laptop',
-        name: 'Dashboard',
-        zhName: '仪表盘',
-        router: '/dashboard',
-      },
+      // {
+      //   id: '1',
+      //   icon: 'laptop',
+      //   name: 'Dashboard',
+      //   zhName: '仪表盘',
+      //   router: '/dashboard',
+      // },
     ],
     locationPathname: '',
     locationQuery: {},
@@ -74,8 +76,11 @@ export default {
 
     setup({ dispatch }) {
       dispatch({ type: 'query' })
+      dispatch({ type: 'queryRoleSelect'})
+      
       dispatch({ type: 'queryUserSelect'})
       dispatch({ type: 'queryCategorySelect'})
+      
     },
   },
   effects: {
@@ -83,34 +88,29 @@ export default {
       const {success, data} = yield call(queryUserInfo, {username: Cookies.get('username')})
       const { locationPathname } = yield select(_ => _.app)
       if (success && data) {
-        // const { list } = yield call(queryRouteList)
-        const user = data
-        let routeList = list
+        const userInfo = data
+        window.localStorage.setItem('controlCode', userInfo._id)
         let permissions = {
           visit: []
         }
-        permissions.visit = routeList.map(item => item.id)
-        // if (
-        //   permissions.role === ROLE_TYPE.ADMIN ||
-        //   permissions.role === ROLE_TYPE.DEVELOPER
-        // ) {
-          // permissions.visit = list.map(item => item.id)
-        // } else {
-        //   routeList = list.filter(item => {
-        //     const cases = [
-        //       permissions.visit.includes(item.id),
-        //       item.mpid
-        //         ? permissions.visit.includes(item.mpid) || item.mpid === '-1'
-        //         : true,
-        //       item.bpid ? permissions.visit.includes(item.bpid) : true,
-        //     ]
-        //     return cases.every(_ => _)
-        //   })
-        // }
+        permissions.visit = userInfo.visit
+        let routeList  = [{
+          id: '10',
+          name: 'Dashborad',
+          zh: {
+            name: '面板'
+          },
+          icon: 'dashboard',
+          route: '/dashborad'
+        }]
+        const routeListFilter = routes.filter(item => {
+          return permissions.visit.includes(String(item.id))
+        })
+        routeList = [...routeList, ...routeListFilter]
         yield put({
           type: 'updateState',
           payload: {
-            user,
+            userInfo,
             permissions,
             routeList,
           },
@@ -151,6 +151,21 @@ export default {
         })
       }
     },
+    *queryRoleSelect({ payload = {}}, { call, put }){
+      const {data} = yield call(queryRoleList, payload)
+      if (data) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            roleSelectList: data.list
+          },
+        })
+        // yield put({
+        //   type: 'updateMenu',
+        //   payload: {}
+        // })
+      }
+    },
 
     *signOut({ payload }, { call, put }) {
       const data = yield call(logoutUser)
@@ -159,7 +174,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            user: {},
+            userInfo: {},
             permissions: { visit: [] },
             menu: [
               {

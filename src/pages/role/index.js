@@ -14,7 +14,7 @@ import Modal from './components/Modal'
 @connect(({ app, role, loading }) => ({ app, role, loading }))
 class Role extends PureComponent {
   render() {
-    const { location, dispatch, role, loading, i18n, app } = this.props
+    const { location, dispatch, role, loading, i18n } = this.props
     const { query, pathname } = location
     const {
       list,
@@ -23,11 +23,8 @@ class Role extends PureComponent {
       modalVisible,
       modalType,
       selectedRowKeys,
+      menuList
     } = role
-
-    const {
-      userSelectList
-    } = app
 
     const handleRefresh = newQuery => {
       router.push({
@@ -43,7 +40,7 @@ class Role extends PureComponent {
     }
 
     const modalProps = {
-      userSelectList,
+      menuList,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,
       maskClosable: false,
@@ -68,6 +65,7 @@ class Role extends PureComponent {
     }
 
     const listProps = {
+      menuList,
       dataSource: list,
       loading: loading.effects['role/query'],
       pagination,
@@ -136,7 +134,7 @@ class Role extends PureComponent {
       dispatch({
         type: 'role/multiDelete',
         payload: {
-          ids: selectedRowKeys,
+          _id: selectedRowKeys,
         },
       }).then(() => {
         handleRefresh({

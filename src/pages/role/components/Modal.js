@@ -34,7 +34,7 @@ class RoleModal extends PureComponent {
   }
 
   render() {
-    const { item = {}, onOk, form, i18n, userSelectList, ...modalProps } = this.props
+    const { item = {}, onOk, form, i18n, menuList, ...modalProps } = this.props
     const { getFieldDecorator } = form
 
     return (
@@ -42,7 +42,7 @@ class RoleModal extends PureComponent {
         <Form layout="horizontal">
         <FormItem label={i18n.t`RoleName`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('roleName', {
-              initialValue: item.categoryName,
+              initialValue: item.roleName,
               rules: [
                 {
                   required: true,
@@ -50,21 +50,25 @@ class RoleModal extends PureComponent {
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem label={i18n.t`CategoryUser`} hasFeedback {...formItemLayout}>
-          {getFieldDecorator('userCode', {
-              initialValue: item.userCode?item.userCode:'',
+          <FormItem label={i18n.t`RolePermission`} hasFeedback {...formItemLayout}>
+          {getFieldDecorator('permission', {
+              initialValue: item.permission?item.permission:[],
               rules: [
                 {
                   required: true,
                 },
               ],
             })(
-            <Select>
-              {userSelectList.map(item => (
-                <Option value={item.userCode} key={item._id}>
-                  {item.userCode}
-                </Option>
-              ))}
+            <Select
+              mode="multiple"
+              placeholder="Please select"
+              style={{ width: '100%' }}
+            >
+              {
+                menuList.map((e, i) => (
+                 <Option key={i}>{e}</Option>
+                ))
+              }
             </Select>
             )}
           </FormItem>         
@@ -74,10 +78,10 @@ class RoleModal extends PureComponent {
   }
 }
 
-CategoryModal.propTypes = {
+RoleModal.propTypes = {
   type: PropTypes.string,
   item: PropTypes.object,
   onOk: PropTypes.func,
 }
 
-export default CategoryModal
+export default RoleModal

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal, Avatar } from 'antd'
+import { Table, Modal, Tag } from 'antd'
 import { DropOption } from 'components'
 import { Trans, withI18n } from '@lingui/react'
 import Link from 'umi/link'
@@ -25,28 +25,30 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
+    const { onDeleteItem, onEditItem, i18n,menuList, ...tableProps } = this.props
 
     const columns = [
       {
-        title: <Trans>CategoryCode</Trans>,
-        dataIndex: '_id',
-        key: '_id'
+        title: <Trans>RoleName</Trans>,
+        dataIndex: 'roleName',
+        key: 'roleName'
       },
       {
-        title: <Trans>CategoryName</Trans>,
-        dataIndex: 'categoryName',
-        key: 'categoryName'
-      },
-      {
-        title: <Trans>CreateTime</Trans>,
-        dataIndex: 'createTime',
-        key: 'createTime',
-      },
-      {
-        title: <Trans>CategoryUser</Trans>,
-        dataIndex: 'categoryUser',
-        key: 'categoryUser',
+        title: <Trans>RolePermission</Trans>,
+        dataIndex: 'permission',
+        key: 'permission',
+        render: permission => 
+        <span>
+          {permission.map(e => {
+            const _tag = menuList[e]
+            return (
+              <Tag color="blue" key={_tag}>
+                {_tag}
+              </Tag>
+            )
+          })}
+         
+        </span>
       },
       {
         title: <Trans>Operation</Trans>,
