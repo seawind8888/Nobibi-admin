@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
 import { Trans, withI18n } from '@lingui/react'
+import { cloneDeep } from 'lodash'
 
 const FormItem = Form.Item
 
@@ -29,7 +30,13 @@ class RoleModal extends PureComponent {
         ...getFieldsValue()
         // key: item.key,
       }
-      onOk(data)
+      const _data = cloneDeep(data)
+      if(_data.permission.indexOf('0')<0) {
+        _data.permission.unshift('0')
+      }
+      _data._id = item._id
+     
+      onOk(_data)
     })
   }
 

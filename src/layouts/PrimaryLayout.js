@@ -70,7 +70,6 @@ class PrimaryLayout extends PureComponent {
             }
           })
         : routeList
-    console.log('routeList',routeList)
     // Find a route that matches the pathname.
     const currentRoute = newRouteList.find(
       _ => _.route && pathMatchRegexp(_.route, location.pathname)

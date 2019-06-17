@@ -70,7 +70,7 @@ class UserModal extends PureComponent {
                   required: true,
                 },
               ],
-            })(<Input.Password password />)}
+            })(<Input.Password password="true" />)}
           </FormItem>
           <FormItem label={i18n.t`NickName`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('userName', {

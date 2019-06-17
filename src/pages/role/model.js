@@ -16,7 +16,7 @@ export default modelExtend(pageModel, {
 
   state: {
     currentItem: {},
-    menuList: ['用户管理','角色管理','分类管理','主题管理','评论管理'],
+    menuList: ['面板','用户管理','角色管理','分类管理','主题管理','评论管理'],
     modalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],

@@ -1,6 +1,6 @@
 module.exports = {
-  siteName: 'AntI Admin',
-  copyright: 'Ant Design Admin  © 2018 zuiidea',
+  siteName: 'Ant CMS Admin',
+  copyright: 'Ant Design Admin  © 2019 seawind8888',
   logoPath: '/logo.svg',
   // apiPrefix: '/api/v1',
   apiPrefix: '/api',

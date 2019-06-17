@@ -1,6 +1,6 @@
 export default  [
   {
-    id: '0',
+    id: '1',
     name: 'Users',
     zh: {
       name: '用户管理'
@@ -12,7 +12,7 @@ export default  [
     route: '/user',
   },
   {
-    id: '1',
+    id: '2',
     name: 'Topic',
     zh: {
       name: '话题管理'
@@ -24,7 +24,7 @@ export default  [
     route: '/post',
   },
   {
-    id: '2',
+    id: '3',
     name: 'category',
     zh: {
       name: '分类管理'
@@ -36,7 +36,7 @@ export default  [
     route: '/category',
   },
   {
-    id: '3',
+    id: '4',
     name: 'Role',
     zh: {
       name: '角色管理'
@@ -48,7 +48,7 @@ export default  [
     route: '/role',
   },
   {
-    id: '4',
+    id: '5',
     name: 'Comment',
     zh: {
       name: '评论管理'

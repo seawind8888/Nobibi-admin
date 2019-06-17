@@ -10,7 +10,6 @@ import api from 'api'
 import config from 'config'
 import routes from '../routes'
 import Cookies from 'js-cookie'
-import { find } from 'lodash'
 
 const { queryRouteList, logoutUser, queryUserInfo, queryUserList, queryCategoryList, queryRoleList } = api
 
@@ -24,15 +23,15 @@ export default {
     userSelectList: [],
     categoryList: [],
     roleSelectList: [],
-    routeList: [
-      // {
-      //   id: '1',
-      //   icon: 'laptop',
-      //   name: 'Dashboard',
-      //   zhName: '仪表盘',
-      //   router: '/dashboard',
-      // },
-    ],
+    routeList: [{
+      id: '0',
+      name: 'Dashboard',
+      zh: {
+        name: '面板'
+      },
+      icon: 'dashboard',
+      route: '/dashboard'
+    }],
     locationPathname: '',
     locationQuery: {},
     theme: store.get('theme') || 'light',
@@ -95,13 +94,13 @@ export default {
         }
         permissions.visit = userInfo.visit
         let routeList  = [{
-          id: '10',
-          name: 'Dashborad',
+          id: '0',
+          name: 'Dashboard',
           zh: {
             name: '面板'
           },
           icon: 'dashboard',
-          route: '/dashborad'
+          route: '/dashboard'
         }]
         const routeListFilter = routes.filter(item => {
           return permissions.visit.includes(String(item.id))
@@ -160,10 +159,6 @@ export default {
             roleSelectList: data.list
           },
         })
-        // yield put({
-        //   type: 'updateMenu',
-        //   payload: {}
-        // })
       }
     },
 
