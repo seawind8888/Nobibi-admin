@@ -1,5 +1,7 @@
 coverage
 dist
+dist.zip
+ant-cms-admin.zip
 node_modules
 npm-debug.log
 yarn-error.log

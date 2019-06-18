@@ -1,7 +1,8 @@
 # ant-cms-admin
 ### 关于项目
-此项目为前端部分，后端项目为[node-cms-mongo-es6](https://github.com/seawind8888/node-cms-mongo-es6)
-此项目基于开源后台项目[ant-admin](https://github.com/zuiidea/antd-admin)开发
+- 此项目基于[ant-admin](https://github.com/zuiidea/antd-admin)开发的CMS内容管理系统，适用于任何内容型管理后台
+- 此项目仅前端部分，后端项目地址为[node-cms-mongo-es6](https://github.com/seawind8888/node-cms-mongo-es6)
+
 
 
 ### 运行项目
@@ -24,6 +25,9 @@ npm run start
 ```
 
 ### 效果演示
+[演示地址](http://47.244.103.124:8000)
+
+
 
 ### 功能模块
 
