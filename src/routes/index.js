@@ -13,15 +13,15 @@ export default  [
   },
   {
     id: '2',
-    name: 'Topic',
+    name: 'Role',
     zh: {
-      name: '话题管理'
+      name: '角色管理'
     },
     'pt-br': {
-      name: 'Posts'
+      name: 'Usuário'
     },
-    icon: 'read',
-    route: '/post',
+    icon: 'team',
+    route: '/role',
   },
   {
     id: '3',
@@ -37,15 +37,15 @@ export default  [
   },
   {
     id: '4',
-    name: 'Role',
+    name: 'Topic',
     zh: {
-      name: '角色管理'
+      name: '主题管理'
     },
     'pt-br': {
-      name: 'Usuário'
+      name: 'Posts'
     },
-    icon: 'team',
-    route: '/role',
+    icon: 'read',
+    route: '/post',
   },
   {
     id: '5',
