@@ -25,7 +25,13 @@ npm run start
 ```
 
 ### 效果演示
-[演示地址](http://47.244.103.124:8000)
+> [演示地址](http://47.244.103.124:8000)
+
+![image](/preview/demo.gif)
+![image](/preview/dashboard@2x.png)
+![image](/preview/role@2x.png)
+![image](/preview/topic@2x.png)
+
 
 
 
