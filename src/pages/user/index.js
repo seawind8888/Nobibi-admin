@@ -14,7 +14,7 @@ import Modal from './components/Modal'
 @connect(({ user, app, loading }) => ({ user, app, loading }))
 class User extends PureComponent {
   render() {
-    const { location, dispatch, user, loading, i18n, app } = this.props
+    const { location, dispatch, user, loading, i18n } = this.props
     const { query, pathname } = location
     const {
       list,
@@ -23,12 +23,9 @@ class User extends PureComponent {
       modalVisible,
       modalType,
       selectedRowKeys,
+      roleSelectList
     } = user
 
-
-    const {
-      roleSelectList
-    } = app
 
     const handleRefresh = newQuery => {
       router.push({

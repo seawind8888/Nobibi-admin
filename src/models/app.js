@@ -22,7 +22,6 @@ export default {
     },
     userSelectList: [],
     categoryList: [],
-    roleSelectList: [],
     routeList: [{
       id: '0',
       name: 'Dashboard',
@@ -75,10 +74,6 @@ export default {
 
     setup({ dispatch }) {
       dispatch({ type: 'query' })
-      dispatch({ type: 'queryRoleSelect'})
-      
-      dispatch({ type: 'queryUserSelect'})
-      dispatch({ type: 'queryCategorySelect'})
       
     },
   },
@@ -128,40 +123,8 @@ export default {
         })
       }
     },
-    *queryUserSelect({ payload = {}}, { call, put }) {
-      const {data} = yield call(queryUserList, payload)
-      if (data) {
-        yield put({
-          type: 'updateState',
-          payload: {
-            userSelectList: data.list
-          },
-        })
-      }
-    },
-    *queryCategorySelect({ payload = {}}, { call, put }){
-      const {data} = yield call(queryCategoryList, payload)
-      if (data) {
-        yield put({
-          type: 'updateState',
-          payload: {
-            categoryList: data.list
-          },
-        })
-      }
-    },
-    *queryRoleSelect({ payload = {}}, { call, put }){
-      const {data} = yield call(queryRoleList, payload)
-      if (data) {
-        yield put({
-          type: 'updateState',
-          payload: {
-            roleSelectList: data.list
-          },
-        })
-      }
-    },
-
+    
+  
     *signOut({ payload }, { call, put }) {
       const data = yield call(logoutUser)
       Cookies.remove('username')

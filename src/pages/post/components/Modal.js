@@ -34,10 +34,6 @@ class PostModal extends PureComponent {
       onOk(data)
     })
   }
-  handleSelectUser = (user) => {
-    const { onSelectUser } = this.props
-    onSelectUser(user)
-  }
 
   render() {
     const { item = {}, onOk, form, i18n, userSelectList, categoryList, ...modalProps } = this.props
@@ -66,8 +62,7 @@ class PostModal extends PureComponent {
                 },
               ],
             })(
-            <Select 
-              onChange={this.handleSelectUser}>
+            <Select >
               {userSelectList.map(item => (
                 <Option value={item.userCode} key={item._id}>
                   {item.userCode}

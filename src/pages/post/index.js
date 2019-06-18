@@ -15,7 +15,7 @@ import Modal from './components/Modal'
 class Post extends PureComponent {
     
     render() {
-        const { location, dispatch, post, loading, i18n, app } = this.props
+        const { location, dispatch, post, loading, i18n } = this.props
         const { query, pathname } = location
         
         const {
@@ -25,12 +25,9 @@ class Post extends PureComponent {
             modalVisible,
             modalType,
             selectedRowKeys,
-            
+            userSelectList,
+            categoryList
           } = post
-        const {
-          userSelectList,
-          categoryList
-        } = app
 
         const listProps = {
             dataSource: list,
@@ -133,14 +130,6 @@ class Post extends PureComponent {
                 type: 'post/hideModal',
               })
             },
-            onSelectUser(userCode) {
-              dispatch({
-                type: 'post/queryCategorySelect',
-                payload: {
-                  userCode,
-                }
-              })
-            }
           }
         const handleDeleteItems = () => {
             dispatch({

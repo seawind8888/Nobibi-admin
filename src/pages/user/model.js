@@ -8,7 +8,8 @@ const {
   queryUserList,
   createUser,
   removeUser,
-  updateUser
+  updateUser,
+  queryRoleList
 } = api
 
 export default modelExtend(pageModel, {
@@ -19,11 +20,13 @@ export default modelExtend(pageModel, {
     modalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
+    roleSelectList: [],
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
+        dispatch({ type: 'queryRoleSelect'})
         if (pathMatchRegexp('/user', location.pathname)) {
           const payload = location.query || { page: 1, pageSize: 10 }
           dispatch({
@@ -48,6 +51,17 @@ export default modelExtend(pageModel, {
               pageSize: Number(payload.pageSize) || 10,
               total: data.total,
             },
+          },
+        })
+      }
+    },
+    *queryRoleSelect({ payload = {}}, { call, put }){
+      const {data} = yield call(queryRoleList, payload)
+      if (data) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            roleSelectList: data.list
           },
         })
       }

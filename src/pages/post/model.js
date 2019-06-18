@@ -8,7 +8,8 @@ const {
     createPost,
     removePost,
     updatePost,
-    removePostList
+    queryUserList,
+    queryCategoryList
   } = api
 
 export default modelExtend(pageModel, {
@@ -19,11 +20,14 @@ export default modelExtend(pageModel, {
         modalVisible: false,
         modalType: 'create',
         selectedRowKeys: [],
-        categoryList: []
+        categoryList: [],
+        userSelectList: []
     },
     subscriptions: {
         setup({ dispatch, history }) {
           history.listen(location => {
+            dispatch({ type: 'queryUserSelect'})
+            dispatch({ type: 'queryCategorySelect'})
             if (pathMatchRegexp('/post', location.pathname)) {
               const payload = location.query || { page: 1, pageSize: 10 }
               dispatch({
@@ -50,6 +54,28 @@ export default modelExtend(pageModel, {
                     },
                 })
             }
+        },
+        *queryUserSelect({ payload = {}}, { call, put }) {
+          const {data} = yield call(queryUserList, payload)
+          if (data) {
+            yield put({
+              type: 'updateState',
+              payload: {
+                userSelectList: data.list
+              },
+            })
+          }
+        },
+        *queryCategorySelect({ payload = {}}, { call, put }){
+          const {data} = yield call(queryCategoryList, payload)
+          if (data) {
+            yield put({
+              type: 'updateState',
+              payload: {
+                categoryList: data.list
+              },
+            })
+          }
         },
        
         *delete({ payload }, { call, put, select }) {
