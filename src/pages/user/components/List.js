@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Table, Modal, Avatar } from 'antd'
 import { DropOption } from 'components'
 import { Trans, withI18n } from '@lingui/react'
-import Link from 'umi/link'
 import styles from './List.less'
 
 const { confirm } = Modal
@@ -27,18 +26,41 @@ class List extends PureComponent {
       })
     }
   }
+  initAvatar = (row) => {
+    if(!row.avatar) {
+      return(
+        <Avatar icon="user" />
+      )
+    } else {
+      if(row.avatar.length > 7) {
+        return(
+          <Avatar icon="user" />
+        )
+      } else {
+        return(
+          <Avatar 
+          style={{
+            backgroundColor: row.avatar,
+            verticalAlign: 'middle', 
+            textTransform: 'capitalize'
+          }}>{row.userName.slice(0,1)}</Avatar>
+        )
+      }
+    }
+  }
 
   render() {
     const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
 
     const columns = [
       {
-        title: <Trans>Name</Trans>,
-        dataIndex: 'userCode',
-        key: 'userCode'
+        title: <Trans>Avatar</Trans>,
+        dataIndex: 'avatar',
+        key: 'avatar',
+        render: (text,record) => <span>{this.initAvatar(record)}</span>
       },
       {
-        title: <Trans>NickName</Trans>,
+        title: <Trans>Name</Trans>,
         dataIndex: 'userName',
         key: 'userName'
       },

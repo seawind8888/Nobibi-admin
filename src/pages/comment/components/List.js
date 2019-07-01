@@ -30,8 +30,8 @@ class List extends PureComponent {
     const columns = [
       {
         title: <Trans>CommentUser</Trans>,
-        dataIndex: 'userCode',
-        key: 'userCode'
+        dataIndex: 'userName',
+        key: 'userName'
       },
       {
         title: <Trans>CreateTime</Trans>,

@@ -84,7 +84,7 @@ class Filter extends Component {
   render() {
     const { onAdd, filter, form, i18n, roleSelectList } = this.props
     const { getFieldDecorator } = form
-    const { userCode, refUserRoleCode } = filter
+    const { userName, refUserRoleCode } = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {
@@ -97,7 +97,7 @@ class Filter extends Component {
     return (
       <Row gutter={24}>
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('userCode', { initialValue: userCode || null })(
+          {getFieldDecorator('userName', { initialValue: userName || null })(
             <Search
               placeholder={i18n.t`Search Name`}
               onSearch={this.handleSubmit}

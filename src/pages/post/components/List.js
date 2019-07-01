@@ -51,8 +51,8 @@ class List extends PureComponent {
       },
       {
         title: <Trans>PostAuther</Trans>,
-        dataIndex: 'userCode',
-        key: 'userCode'
+        dataIndex: 'userName',
+        key: 'userName'
       },
       {
         title: <Trans>PostStatus</Trans>,

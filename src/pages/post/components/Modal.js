@@ -54,8 +54,8 @@ class PostModal extends PureComponent {
             })(<Input/>)}
           </FormItem>
           <FormItem label={i18n.t`PostAuther`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('userCode', {
-              initialValue: item.userCode?item.userCode:'',
+            {getFieldDecorator('userName', {
+              initialValue: item.userName?item.userName:'',
               rules: [
                 {
                   required: true,
@@ -64,8 +64,8 @@ class PostModal extends PureComponent {
             })(
             <Select >
               {userSelectList.map(item => (
-                <Option value={item.userCode} key={item._id}>
-                  {item.userCode}
+                <Option value={item.userName} key={item._id}>
+                  {item.userName}
                 </Option>
               ))}
             </Select>

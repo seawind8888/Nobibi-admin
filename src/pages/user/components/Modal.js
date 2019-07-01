@@ -4,6 +4,7 @@ import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
 import { Trans, withI18n } from '@lingui/react'
 import md5 from 'md5'
 import { find } from 'lodash'
+import { getRandomColor } from 'utils'
 
 const FormItem = Form.Item
 
@@ -31,6 +32,7 @@ class UserModal extends PureComponent {
       const data = {
         ...getFieldsValue(),
         _id: item._id,
+        avatar: getRandomColor(),
         controlCode: window.localStorage.getItem('controlCode'),
         visit: this.state.roleSelectPermission
         // key: item.key,
@@ -53,8 +55,8 @@ class UserModal extends PureComponent {
       <Modal {...modalProps} onOk={this.handleOk}>
         <Form layout="horizontal">
         <FormItem label={i18n.t`Name`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('userCode', {
-              initialValue: item.userCode?item.userCode:'',
+            {getFieldDecorator('userName', {
+              initialValue: item.userName?item.userName:'',
               rules: [
                 {
                   required: true,
@@ -71,16 +73,6 @@ class UserModal extends PureComponent {
                 },
               ],
             })(<Input.Password password="true" />)}
-          </FormItem>
-          <FormItem label={i18n.t`NickName`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('userName', {
-              initialValue: item.userName  || '',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(<Input />)}
           </FormItem>
           <FormItem label={i18n.t`Email`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('email', {
