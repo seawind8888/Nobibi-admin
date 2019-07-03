@@ -4,6 +4,7 @@ import { Form, Input, Modal, Select } from 'antd'
 import { Trans, withI18n } from '@lingui/react'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
+import { find } from 'lodash'
 
 const FormItem = Form.Item
 
@@ -18,6 +19,9 @@ const formItemLayout = {
 @withI18n()
 @Form.create()
 class PostModal extends PureComponent {
+  state = {
+    userAvatar: ''
+  }
   handleOk = () => {
     const { item = {}, onOk,form } = this.props
     const { validateFields, getFieldsValue } = form
@@ -31,7 +35,15 @@ class PostModal extends PureComponent {
       }
       data.content = data.content.toHTML()
       data._id = item._id
+      data.userAvatar = this.state.userAvatar
       onOk(data)
+    })
+  }
+  handleSelectName = (name) => {
+    const { userSelectList } = this.props
+    const _row = find(userSelectList, ['userName', name])
+    this.setState({
+      userAvatar: _row.avatar || ''
     })
   }
 
@@ -62,11 +74,12 @@ class PostModal extends PureComponent {
                 },
               ],
             })(
-            <Select >
-              {userSelectList.map(item => (
-                <Option value={item.userName} key={item._id}>
+            <Select 
+              onChange={this.handleSelectName}>
+              {userSelectList.map((item, index) => (
+                <Select.Option value={item.userName} key={index}>
                   {item.userName}
-                </Option>
+                </Select.Option>
               ))}
             </Select>
             )}
@@ -81,10 +94,10 @@ class PostModal extends PureComponent {
               ],
             })(
             <Select >
-              {categoryList.map(item => (
-                <Option value={item.categoryName} key={item._id}>
+              {categoryList.map((item, index) => (
+                <Select.Option value={item.categoryName} key={index}>
                   {item.categoryName}
-                </Option>
+                </Select.Option>
               ))}
             </Select>
             )}
@@ -99,12 +112,12 @@ class PostModal extends PureComponent {
               ],
             })(
             <Select>
-              <Option value={'PUBLISH'}>
+              <Select.Option value={'PUBLISH'}>
                 <Trans>Publish</Trans>
-              </Option>
-              <Option value={'DRAFT'}>
+              </Select.Option>
+              <Select.Option value={'DRAFT'}>
                 <Trans>Draft</Trans>
-              </Option>
+              </Select.Option>
             </Select>
             )}
           </FormItem>

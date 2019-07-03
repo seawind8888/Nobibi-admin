@@ -1,6 +1,6 @@
 module.exports = {
-  siteName: 'Ant CMS Admin',
-  copyright: 'Ant Design Admin  © 2019 seawind8888',
+  siteName: 'Nobibi Admin',
+  copyright: 'Nobibi Admin  © 2019 seawind8888',
   logoPath: '/logo.svg',
   // apiPrefix: '/api/v1',
   apiPrefix: '/api',
