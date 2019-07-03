@@ -1,5 +1,5 @@
 # Nobibi-admin
-此项目为Nobibi后台管理界面，需依赖api项目[Nobibi-api](https://github.com/
+此项目为Nobibi后台管理界面，需依赖api项目[Nobibi-api](https://github.com/)
 
 
 ## 运行项目
