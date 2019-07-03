@@ -1,11 +1,8 @@
 # Nobibi-admin
-
-### 关于项目
-- 此项目为Nobibi后台管理界面，需依赖api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
+此项目为Nobibi后台管理界面，需依赖api项目[Nobibi-api](https://github.com/
 
 
-
-### 运行项目
+## 运行项目
 > 保证已启动api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
 
 1. Clone项目
@@ -24,7 +21,7 @@ npm install 或 yarn
 npm run start
 ```
 
-### 效果演示
+## 效果演示
 > [演示地址](http://47.244.103.124:8000)
 
 ![image](/preview/demo.gif)
@@ -35,7 +32,7 @@ npm run start
 
 
 
-### 功能模块
+## 功能模块
 
 - [x] 用户管理
 - [x] 角色管理
@@ -43,7 +40,7 @@ npm run start
 - [x] 评论管理
 - [x] 内容分类管理
 
-### 目录结构
+## 目录结构
 
 ``` lua
 ant-cms-admin
@@ -84,7 +81,7 @@ ant-cms-admin
 
 ```
 
-### 技术选型
+## 技术选型
 
 - react - [https://reactjs.org/](https://reactjs.org/)
 - Ant Design - [https://ant.design/docs/react/introduce-cn](https://ant.design/docs/react/introduce-cn)
