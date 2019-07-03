@@ -1,16 +1,16 @@
-# ant-cms-admin
+# Nobibi-admin
+
 ### 关于项目
-- 此项目基于[ant-admin](https://github.com/zuiidea/antd-admin)开发的CMS内容管理系统，适用于任何内容型管理后台
-- 此项目仅前端部分，后端项目地址为[node-cms-mongo-es6](https://github.com/seawind8888/node-cms-mongo-es6)
+- 此项目为Nobibi后台管理界面，需依赖api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
 
 
 
 ### 运行项目
-> 项目运行前请保证已经开启依赖后端项目[node-cms-mongo-es6](https://github.com/seawind8888/node-cms-mongo-es6)
+> 保证已启动api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
 
 1. Clone项目
 ```
-git clone https://github.com/seawind8888/ant-cms-admin my-project
+git clone https://github.com/seawind8888/Nobibi-admin my-project
 ```
 
 2. 安装依赖
