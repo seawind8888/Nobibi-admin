@@ -78,9 +78,9 @@ class Filter extends Component {
   }
 
   render() {
-    const { onAdd, filter, form, i18n, userSelectList } = this.props
+    const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
-    const { topicTitle, userName } = filter
+    const { topicTitle} = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {
@@ -98,20 +98,6 @@ class Filter extends Component {
               placeholder={i18n.t`Search Post Title`}
               onSearch={this.handleSubmit}
             />
-          )}
-        </Col>
-        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('userName', { initialValue: userName })(
-           <Select 
-            style={{width: '200px'}}
-            placeholder={i18n.t`PostAuther`}
-            allowClear>
-            {userSelectList.map(item => (
-              <Option value={item.userName} key={item._id}>
-                {item.userName}
-              </Option>
-            ))}
-          </Select>
           )}
         </Col>
         <Col

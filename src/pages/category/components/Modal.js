@@ -17,7 +17,7 @@ const formItemLayout = {
 @Form.create()
 class CategoryModal extends PureComponent {
   handleOk = () => {
-    const { item = {}, onOk, form } = this.props
+    const { item = {}, onOk, form, userInfo} = this.props
     const { validateFields, getFieldsValue } = form
     
 
@@ -27,7 +27,8 @@ class CategoryModal extends PureComponent {
       }
       const data = {
         ...getFieldsValue(),
-        _id: item._id
+        _id: item._id,
+        userName: userInfo.userName
         // key: item.key,
       }
       onOk(data)
@@ -51,24 +52,6 @@ class CategoryModal extends PureComponent {
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem label={i18n.t`CategoryUser`} hasFeedback {...formItemLayout}>
-          {getFieldDecorator('userName', {
-              initialValue: item.userName?item.userName:'',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(
-            <Select>
-              {userSelectList.map(item => (
-                <Option value={item.userName} key={item._id}>
-                  {item.userName}
-                </Option>
-              ))}
-            </Select>
-            )}
-          </FormItem>         
         </Form>
       </Modal>
     )

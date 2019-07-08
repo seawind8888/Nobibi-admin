@@ -26,7 +26,7 @@ class Category extends PureComponent {
     } = category
 
     const {
-      userSelectList
+      userInfo
     } = app
 
     const handleRefresh = newQuery => {
@@ -43,7 +43,7 @@ class Category extends PureComponent {
     }
 
     const modalProps = {
-      userSelectList,
+      userInfo,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,
       maskClosable: false,

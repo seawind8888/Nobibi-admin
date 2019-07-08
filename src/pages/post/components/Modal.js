@@ -23,7 +23,7 @@ class PostModal extends PureComponent {
     userAvatar: ''
   }
   handleOk = () => {
-    const { item = {}, onOk,form } = this.props
+    const { item = {}, onOk,form, userInfo } = this.props
     const { validateFields, getFieldsValue } = form
     validateFields(errors => {
       if (errors) {
@@ -36,19 +36,13 @@ class PostModal extends PureComponent {
       data.content = data.content.toHTML()
       data._id = item._id
       data.userAvatar = this.state.userAvatar
+      data.userName = userInfo.userName
       onOk(data)
-    })
-  }
-  handleSelectName = (name) => {
-    const { userSelectList } = this.props
-    const _row = find(userSelectList, ['userName', name])
-    this.setState({
-      userAvatar: _row.avatar || ''
     })
   }
 
   render() {
-    const { item = {}, onOk, form, i18n, userSelectList, categoryList, ...modalProps } = this.props
+    const { item = {}, onOk, form, i18n,  categoryList, ...modalProps } = this.props
     const { getFieldDecorator } = form
     const editorState = BraftEditor.createEditorState(item.content)
 
@@ -64,25 +58,6 @@ class PostModal extends PureComponent {
                 },
               ],
             })(<Input/>)}
-          </FormItem>
-          <FormItem label={i18n.t`PostAuther`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('userName', {
-              initialValue: item.userName?item.userName:'',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
-            })(
-            <Select 
-              onChange={this.handleSelectName}>
-              {userSelectList.map((item, index) => (
-                <Select.Option value={item.userName} key={index}>
-                  {item.userName}
-                </Select.Option>
-              ))}
-            </Select>
-            )}
           </FormItem>
           <FormItem label={i18n.t`PostCategory`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('category', {

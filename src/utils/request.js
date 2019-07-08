@@ -15,8 +15,7 @@ export default function request(options) {
   const cloneData = cloneDeep(data)
  
   try {
-    let domain = 'http://localhost:3001'
-    // let domain = ''
+    let domain = process.env.API_HOST
     const urlMatch = url.match(/[a-zA-z]+:\/\/[^/]*/)
     if (urlMatch) {
       ;[domain] = urlMatch

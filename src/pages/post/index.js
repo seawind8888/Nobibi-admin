@@ -15,7 +15,7 @@ import Modal from './components/Modal'
 class Post extends PureComponent {
     
     render() {
-        const { location, dispatch, post, loading, i18n } = this.props
+        const { location, dispatch, post, loading, i18n, app } = this.props
         const { query, pathname } = location
         
         const {
@@ -25,9 +25,11 @@ class Post extends PureComponent {
             modalVisible,
             modalType,
             selectedRowKeys,
-            userSelectList,
             categoryList
           } = post
+        const {
+          userInfo
+        } = app
 
         const listProps = {
             dataSource: list,
@@ -86,7 +88,6 @@ class Post extends PureComponent {
             })
           }
           const filterProps = {
-            userSelectList,
             filter: {
               ...query,
             },
@@ -106,7 +107,7 @@ class Post extends PureComponent {
             },
           }
         const modalProps = {
-            userSelectList,
+            userInfo,
             categoryList,
             width: 1000,
             item: modalType === 'create' ? {} : currentItem,

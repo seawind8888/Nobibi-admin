@@ -8,7 +8,6 @@ const {
     createPost,
     removePost,
     updatePost,
-    queryUserList,
     queryCategoryList
   } = api
 
@@ -21,7 +20,6 @@ export default modelExtend(pageModel, {
         modalType: 'create',
         selectedRowKeys: [],
         categoryList: [],
-        userSelectList: []
     },
     subscriptions: {
         setup({ dispatch, history }) {
@@ -54,17 +52,6 @@ export default modelExtend(pageModel, {
                     },
                 })
             }
-        },
-        *queryUserSelect({ payload = {}}, { call, put }) {
-          const {data} = yield call(queryUserList, payload)
-          if (data) {
-            yield put({
-              type: 'updateState',
-              payload: {
-                userSelectList: data.list
-              },
-            })
-          }
         },
         *queryCategorySelect({ payload = {}}, { call, put }){
           const {data} = yield call(queryCategoryList, payload)
