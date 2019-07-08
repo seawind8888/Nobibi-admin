@@ -21,6 +21,53 @@ npm install 或 yarn
 npm run start
 ```
 
+## 部署项目
+> 保证已启动api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
+
+1. Clone项目
+```
+git clone https://github.com/seawind8888/Nobibi-admin my-project
+```
+
+## 部署项目
+> 保证已启动api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
+
+1. 打包项目
+```
+运行 npm run build
+```
+
+2. 上传dist目录下代码到远程服务器
+```
+windows&mac有异同，请自行百度或科学Goo
+```
+
+3. 设置nginx 配置
+```
+server
+    {
+        listen       80;
+        # 指定可访问的域名
+        server_name Nobibi.com;
+        # 编译后的文件存放的目录
+        root  /你的项目目录
+
+        # 因为前端使用了BrowserHistory，所以将路由 fallback 到 index.html
+        location / {
+                index  index.html;
+                try_files $uri $uri/ /index.html;
+        }
+    }
+```
+
+4. 重启ngxin
+```
+nginx -s reload
+```
+
+
+
+
 ## 效果演示
 > [演示地址](http://47.244.103.124:8000)
 
