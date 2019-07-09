@@ -24,25 +24,26 @@ npm run start
 ## 部署项目
 > 保证已启动api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
 
-1. Clone项目
+1. 修改.umirc.prod.js里的配置
 ```
-git clone https://github.com/seawind8888/Nobibi-admin my-project
+export default {
+    define: {
+      
+      "process.env.API_HOST": 'http://yourapihost:port', // 你的的接口host
+  }
 ```
 
-## 部署项目
-> 保证已启动api项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
-
-1. 打包项目
+2. 打包项目
 ```
 运行 npm run build
 ```
 
-2. 上传dist目录下代码到远程服务器
+3. 上传dist目录下代码到远程服务器
 ```
 windows&mac有异同，请自行百度或科学Goo
 ```
 
-3. 设置nginx 配置
+4. 设置nginx 配置
 ```
 server
     {
@@ -60,7 +61,7 @@ server
     }
 ```
 
-4. 重启ngxin
+5. 重启ngxin
 ```
 nginx -s reload
 ```
