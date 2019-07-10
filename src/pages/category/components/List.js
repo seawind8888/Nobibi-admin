@@ -45,8 +45,8 @@ class List extends PureComponent {
       },
       {
         title: <Trans>CategoryUser</Trans>,
-        dataIndex: 'categoryUser',
-        key: 'categoryUser',
+        dataIndex: 'userName',
+        key: 'userName',
       },
       {
         title: <Trans>Operation</Trans>,

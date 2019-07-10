@@ -67,22 +67,9 @@ class List extends PureComponent {
       },
       {
         title: <Trans>PostCategory</Trans>,
-        dataIndex: 'category',
-        key: 'category',
-        render: category => 
-          <span>
-            {category.map(tag => {
-              let color = tag.length > 5 ? 'geekblue' : 'green';
-              if (tag === 'loser') {
-                color = 'volcano';
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag}
-                </Tag>
-              );
-            })}
-          </span>
+        dataIndex: 'categoryName',
+        key: 'categoryName',
+        render: (categoryName,record)  =>  <Tag color={record.categoryColor}>{categoryName}</Tag>
         
       },
       {

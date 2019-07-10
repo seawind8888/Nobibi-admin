@@ -72,10 +72,10 @@ nginx -s reload
 ## 效果演示
 > [演示地址](http://47.244.103.124:8000)
 
-![image](/preview/demo.gif)
-![image](/preview/dashboard@2x.png)
-![image](/preview/role@2x.png)
-![image](/preview/topic@2x.png)
+![image](/screenshot/demo.gif)
+![image](/screenshot/dashboard@2x.png)
+![image](/screenshot/role@2x.png)
+![image](/screenshot/topic@2x.png)
 
 
 

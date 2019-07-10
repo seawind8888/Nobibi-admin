@@ -20,10 +20,10 @@ const formItemLayout = {
 @Form.create()
 class UserModal extends PureComponent {
   state = {
-    roleSelectPermission: {}
+    roleSelectPermission: []
   }
   handleOk = () => {
-    const { item = {}, onOk, form } = this.props
+    const { item = {}, onOk, form, modalType } = this.props
     const { validateFields, getFieldsValue } = form
     validateFields(errors => {
       if (errors) {
@@ -32,12 +32,20 @@ class UserModal extends PureComponent {
       const data = {
         ...getFieldsValue(),
         _id: item._id,
-        avatar: getRandomColor(),
         controlCode: window.localStorage.getItem('controlCode'),
-        visit: this.state.roleSelectPermission
         // key: item.key,
       }
-      data.password = md5(data.password)
+      if(!!this.state.roleSelectPermission.length) {
+        data.visit = this.state.roleSelectPermission
+      }
+      if(modalType === 'create') {
+        data.avatar = getRandomColor()
+       
+      }
+      if(data.password) {
+        data.password = md5(data.password)
+      }
+    
       onOk(data)
     })
   }
@@ -66,12 +74,7 @@ class UserModal extends PureComponent {
           </FormItem>
           <FormItem label={i18n.t`Password`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('password', {
-              initialValue: item.password  || '',
-              rules: [
-                {
-                  required: true,
-                },
-              ],
+              initialValue: item.password  || ''
             })(<Input.Password password="true" />)}
           </FormItem>
           <FormItem label={i18n.t`Email`} hasFeedback {...formItemLayout}>

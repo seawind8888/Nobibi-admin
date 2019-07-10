@@ -41,6 +41,7 @@ class User extends PureComponent {
     }
 
     const modalProps = {
+      modalType,
       roleSelectList,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,

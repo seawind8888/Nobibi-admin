@@ -44,6 +44,7 @@ class Category extends PureComponent {
 
     const modalProps = {
       userInfo,
+      modalType,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,
       maskClosable: false,
