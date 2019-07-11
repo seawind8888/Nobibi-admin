@@ -5,6 +5,7 @@ import { Trans, withI18n } from '@lingui/react'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
 import { find } from 'lodash'
+// import RichEditor from './component/RichEditor'
 
 const FormItem = Form.Item
 
@@ -20,7 +21,16 @@ const formItemLayout = {
 @Form.create()
 class PostModal extends PureComponent {
   state = {
-    userAvatar: ''
+    userAvatar: '',
+    categoryColor: ''
+  }
+  handleSelectCategory = (e) => {
+    const { categoryList } = this.props;
+    const _category =  find(categoryList, ['categoryName', e]);
+    this.setState({
+      categoryColor:_category.categoryColor
+    });
+    
   }
   handleOk = () => {
     const { item = {}, onOk,form, userInfo } = this.props
@@ -33,6 +43,9 @@ class PostModal extends PureComponent {
         ...getFieldsValue()
         // key: item.key,
       }
+      if(this.state.categoryColor) {
+        data.categoryColor = this.state.categoryColor
+      }
       data.content = data.content.toHTML()
       data._id = item._id
       data.userAvatar = this.state.userAvatar
@@ -40,6 +53,11 @@ class PostModal extends PureComponent {
       onOk(data)
     })
   }
+  handleSelectChange = value => {
+    this.props.form.setFieldsValue({
+      content: value,
+    });
+  };
 
   render() {
     const { item = {}, onOk, form, i18n,  categoryList, ...modalProps } = this.props
@@ -60,7 +78,7 @@ class PostModal extends PureComponent {
             })(<Input/>)}
           </FormItem>
           <FormItem label={i18n.t`PostCategory`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('category', {
+            {getFieldDecorator('categoryName', {
               initialValue: item.category,
               rules: [
                 {
@@ -68,9 +86,11 @@ class PostModal extends PureComponent {
                 },
               ],
             })(
-            <Select >
+            <Select onChange={this.handleSelectCategory}>
               {categoryList.map((item, index) => (
-                <Select.Option value={item.categoryName} key={index}>
+                <Select.Option 
+                  
+                  value={item.categoryName} key={index}>
                   {item.categoryName}
                 </Select.Option>
               ))}
@@ -101,7 +121,7 @@ class PostModal extends PureComponent {
                 initialValue: editorState
               })(
                 <BraftEditor
-                  value={item.content}
+                  onChange={this.handleSelectChange}
                   style={{border: '1px #dddddd solid', borderRadius: '2px'}}
                 />
               )}
