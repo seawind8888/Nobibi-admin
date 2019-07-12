@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
 import { Trans, withI18n } from '@lingui/react'
-import { getRandomColor } from 'utils'
 import { userInfo } from 'os';
 
 const FormItem = Form.Item
@@ -19,7 +18,7 @@ const formItemLayout = {
 @Form.create()
 class CategoryModal extends PureComponent {
   handleOk = () => {
-    const { item = {}, onOk, form, modalType, userInfo} = this.props
+    const { item = {}, onOk, form,  userInfo} = this.props
     const { validateFields, getFieldsValue } = form
     
 
@@ -33,9 +32,6 @@ class CategoryModal extends PureComponent {
         _id: item._id,
         userName: userInfo.userName
         // key: item.key,
-      }
-      if(modalType === 'create') {
-        data.categoryColor = getRandomColor()
       }
       onOk(data)
     })

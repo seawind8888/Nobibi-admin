@@ -69,7 +69,7 @@ class List extends PureComponent {
         title: <Trans>PostCategory</Trans>,
         dataIndex: 'categoryName',
         key: 'categoryName',
-        render: (categoryName,record)  =>  <Tag color={record.categoryColor}>{categoryName}</Tag>
+        render: (categoryName)  =>  <Tag>{categoryName}</Tag>
         
       },
       {

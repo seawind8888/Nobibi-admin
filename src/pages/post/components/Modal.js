@@ -21,16 +21,7 @@ const formItemLayout = {
 @Form.create()
 class PostModal extends PureComponent {
   state = {
-    userAvatar: '',
-    categoryColor: ''
-  }
-  handleSelectCategory = (e) => {
-    const { categoryList } = this.props;
-    const _category =  find(categoryList, ['categoryName', e]);
-    this.setState({
-      categoryColor:_category.categoryColor
-    });
-    
+    userAvatar: ''
   }
   handleOk = () => {
     const { item = {}, onOk,form, userInfo } = this.props
@@ -42,9 +33,6 @@ class PostModal extends PureComponent {
       const data = {
         ...getFieldsValue()
         // key: item.key,
-      }
-      if(this.state.categoryColor) {
-        data.categoryColor = this.state.categoryColor
       }
       data.content = data.content.toHTML()
       data._id = item._id
@@ -86,7 +74,7 @@ class PostModal extends PureComponent {
                 },
               ],
             })(
-            <Select onChange={this.handleSelectCategory}>
+            <Select>
               {categoryList.map((item, index) => (
                 <Select.Option 
                   
