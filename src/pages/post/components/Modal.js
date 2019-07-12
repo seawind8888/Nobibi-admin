@@ -4,7 +4,6 @@ import { Form, Input, Modal, Select } from 'antd'
 import { Trans, withI18n } from '@lingui/react'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
-import { find } from 'lodash'
 // import RichEditor from './component/RichEditor'
 
 const FormItem = Form.Item
@@ -34,6 +33,7 @@ class PostModal extends PureComponent {
         ...getFieldsValue()
         // key: item.key,
       }
+      data.desc = data.content.toRAW(true).blocks[0].text.slice(0,50)
       data.content = data.content.toHTML()
       data._id = item._id
       data.userAvatar = this.state.userAvatar
