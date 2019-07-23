@@ -11,14 +11,13 @@ export default {
 
   effects: {
     *login({ payload }, { put, call, select }) {
-      
       const res = yield call(loginUser, {
         username: payload.username,
-        password: md5(payload.password)
+        password: md5(payload.password),
       })
       window.localStorage.setItem('username', payload.username)
       window.localStorage.setItem('Token', res.data.token)
-      
+
       const { locationQuery } = yield select(_ => _.app)
       if (res.success) {
         const { from } = locationQuery

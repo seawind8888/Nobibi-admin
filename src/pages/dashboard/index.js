@@ -10,27 +10,21 @@ import styles from './index.less'
 @withI18n()
 @connect(({ app, dashboard, loading }) => ({ app, dashboard, loading }))
 class Dashboard extends PureComponent {
-    
-    render() {
-        const { location, dispatch, dashboard, loading, i18n, app } = this.props
-        const { query, pathname } = location
-        const {
-            numbers
-          } = dashboard
-        const numberCards = numbers.map((item, key) => (
-            <Col key={key} lg={6} md={12}>
-              <NumberCard {...item} />
-            </Col>
-          ))
-        return (
-          <Page inner>
-             <div>
-                {numberCards}
-            </div>
-          </Page>
-           
-        )
-    }
+  render() {
+    const { location, dispatch, dashboard, loading, i18n, app } = this.props
+    const { query, pathname } = location
+    const { numbers } = dashboard
+    const numberCards = numbers.map((item, key) => (
+      <Col key={key} lg={6} md={12}>
+        <NumberCard {...item} />
+      </Col>
+    ))
+    return (
+      <Page inner>
+        <div>{numberCards}</div>
+      </Page>
+    )
+  }
 }
 Dashboard.propTypes = {
   dashboard: PropTypes.object,

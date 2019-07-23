@@ -78,7 +78,7 @@ class Filter extends Component {
   }
   handleChangeRoles = (key, values) => {
     const { form, onFilterChange } = this.props
-    console.log(key +';'+ values)
+    console.log(key + ';' + values)
   }
 
   render() {
@@ -97,7 +97,9 @@ class Filter extends Component {
     return (
       <Row gutter={24}>
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('categoryName', { initialValue: categoryName || null })(
+          {getFieldDecorator('categoryName', {
+            initialValue: categoryName || null,
+          })(
             <Search
               placeholder={i18n.t`Search CategoryName`}
               onSearch={this.handleSubmit}

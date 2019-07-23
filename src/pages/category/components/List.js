@@ -31,12 +31,12 @@ class List extends PureComponent {
       {
         title: <Trans>CategoryCode</Trans>,
         dataIndex: '_id',
-        key: '_id'
+        key: '_id',
       },
       {
         title: <Trans>CategoryName</Trans>,
         dataIndex: 'categoryName',
-        key: 'categoryName'
+        key: 'categoryName',
       },
       {
         title: <Trans>CreateTime</Trans>,
@@ -72,7 +72,7 @@ class List extends PureComponent {
           ...tableProps.pagination,
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
-        style={{width:'100%'}}
+        style={{ width: '100%' }}
         className={styles.table}
         bordered
         scroll={{ x: true }}

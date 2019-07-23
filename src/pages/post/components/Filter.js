@@ -80,7 +80,7 @@ class Filter extends Component {
   render() {
     const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
-    const { topicTitle} = filter
+    const { topicTitle } = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {

@@ -9,17 +9,27 @@ const DropOption = ({
   dropdownProps,
 }) => {
   const menu = menuOptions.map(item => (
-    <Menu.Item key={item.key}>{item.name}</Menu.Item>
+    <Menu.Item key={item.key}> {item.name} </Menu.Item>
   ))
   return (
     <Dropdown
-      overlay={<Menu onClick={onMenuClick}>{menu}</Menu>}
+      overlay={<Menu onClick={onMenuClick}> {menu} </Menu>}
       {...dropdownProps}
     >
-      <Button style={{ border: 'none', ...buttonStyle }}>
-        <Icon style={{ marginRight: 2 }} type="bars" />
+      <Button
+        style={{
+          border: 'none',
+          ...buttonStyle,
+        }}
+      >
+        <Icon
+          style={{
+            marginRight: 2,
+          }}
+          type="bars"
+        />
         <Icon type="down" />
-      </Button>
+      </Button>{' '}
     </Dropdown>
   )
 }

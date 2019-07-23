@@ -31,7 +31,7 @@ class List extends PureComponent {
       {
         title: <Trans>CommentUser</Trans>,
         dataIndex: 'userName',
-        key: 'userName'
+        key: 'userName',
       },
       {
         title: <Trans>CreateTime</Trans>,
@@ -82,7 +82,7 @@ class List extends PureComponent {
           ...tableProps.pagination,
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
-        style={{width:'100%'}}
+        style={{ width: '100%' }}
         className={styles.table}
         bordered
         scroll={{ x: true }}

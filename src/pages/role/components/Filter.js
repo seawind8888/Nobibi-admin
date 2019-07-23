@@ -78,7 +78,7 @@ class Filter extends Component {
   }
   handleChangeRoles = (key, values) => {
     const { form, onFilterChange } = this.props
-    console.log(key +';'+ values)
+    console.log(key + ';' + values)
   }
 
   render() {

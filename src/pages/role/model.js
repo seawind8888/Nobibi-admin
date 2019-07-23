@@ -4,19 +4,21 @@ import { pathMatchRegexp } from 'utils'
 import api from 'api'
 import { pageModel } from 'utils/model'
 
-const {
-  queryRoleList,
-  createRole,
-  removeRole,
-  updateRole
-} = api
+const { queryRoleList, createRole, removeRole, updateRole } = api
 
 export default modelExtend(pageModel, {
   namespace: 'role',
 
   state: {
     currentItem: {},
-    menuList: ['面板','用户管理','角色管理','分类管理','主题管理','评论管理'],
+    menuList: [
+      '面板',
+      '用户管理',
+      '角色管理',
+      '分类管理',
+      '主题管理',
+      '评论管理',
+    ],
     modalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
@@ -38,7 +40,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const {data} = yield call(queryRoleList, payload)
+      const { data } = yield call(queryRoleList, payload)
       if (data) {
         yield put({
           type: 'querySuccess',

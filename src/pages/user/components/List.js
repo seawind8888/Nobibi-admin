@@ -26,24 +26,23 @@ class List extends PureComponent {
       })
     }
   }
-  initAvatar = (row) => {
-    if(!row.avatar) {
-      return(
-        <Avatar icon="user" />
-      )
+  initAvatar = row => {
+    if (!row.avatar) {
+      return <Avatar icon="user" />
     } else {
-      if(row.avatar.length > 7) {
-        return(
-          <Avatar icon="user" />
-        )
+      if (row.avatar.length > 7) {
+        return <Avatar icon="user" />
       } else {
-        return(
-          <Avatar 
-          style={{
-            backgroundColor: row.avatar,
-            verticalAlign: 'middle', 
-            textTransform: 'capitalize'
-          }}>{row.userName.slice(0,1)}</Avatar>
+        return (
+          <Avatar
+            style={{
+              backgroundColor: row.avatar,
+              verticalAlign: 'middle',
+              textTransform: 'capitalize',
+            }}
+          >
+            {row.userName.slice(0, 1)}
+          </Avatar>
         )
       }
     }
@@ -57,16 +56,16 @@ class List extends PureComponent {
         title: <Trans>Avatar</Trans>,
         dataIndex: 'avatar',
         key: 'avatar',
-        render: (text,record) => <span>{this.initAvatar(record)}</span>
+        render: (text, record) => <span>{this.initAvatar(record)}</span>,
       },
       {
         title: <Trans>Name</Trans>,
         dataIndex: 'userName',
-        key: 'userName'
+        key: 'userName',
       },
       {
         title: <Trans>Email</Trans>,
-        dataIndex: 'email'
+        dataIndex: 'email',
       },
       {
         title: <Trans>CreateTime</Trans>,
@@ -77,13 +76,13 @@ class List extends PureComponent {
         title: <Trans>Status</Trans>,
         dataIndex: 'status',
         key: 'status',
-        render: text => <span>{text === 'ENABLE'?'开启':'关闭'}</span>
+        render: text => <span>{text === 'ENABLE' ? '开启' : '关闭'}</span>,
       },
       {
         title: <Trans>Roles</Trans>,
         dataIndex: 'refUserRoleCode',
         key: 'refUserRoleCode',
-        render: text => <span>{text}</span>
+        render: text => <span>{text}</span>,
       },
       {
         title: <Trans>Operation</Trans>,
@@ -109,7 +108,7 @@ class List extends PureComponent {
           ...tableProps.pagination,
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
-        style={{width:'100%'}}
+        style={{ width: '100%' }}
         className={styles.table}
         bordered
         scroll={{ x: true }}

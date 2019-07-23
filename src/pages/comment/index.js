@@ -15,11 +15,7 @@ class Comment extends PureComponent {
   render() {
     const { location, dispatch, comment, loading, app } = this.props
     const { query, pathname } = location
-    const {
-      list,
-      pagination,
-      selectedRowKeys,
-    } = comment
+    const { list, pagination, selectedRowKeys } = comment
 
     const handleRefresh = newQuery => {
       router.push({
@@ -33,7 +29,6 @@ class Comment extends PureComponent {
         ),
       })
     }
-
 
     const listProps = {
       dataSource: list,

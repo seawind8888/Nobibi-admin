@@ -8,7 +8,7 @@ const {
   queryCategoryList,
   createCategory,
   removeCategory,
-  updateCategory
+  updateCategory,
 } = api
 
 export default modelExtend(pageModel, {
@@ -37,7 +37,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const {data} = yield call(queryCategoryList, payload)
+      const { data } = yield call(queryCategoryList, payload)
       if (data) {
         yield put({
           type: 'querySuccess',

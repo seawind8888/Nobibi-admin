@@ -23,9 +23,8 @@ class User extends PureComponent {
       modalVisible,
       modalType,
       selectedRowKeys,
-      roleSelectList
+      roleSelectList,
     } = user
-
 
     const handleRefresh = newQuery => {
       router.push({
@@ -137,7 +136,7 @@ class User extends PureComponent {
         type: 'user/multiDelete',
         payload: {
           _id: selectedRowKeys,
-          controlCode: window.localStorage.getItem('controlCode')
+          controlCode: window.localStorage.getItem('controlCode'),
         },
       }).then(() => {
         handleRefresh({

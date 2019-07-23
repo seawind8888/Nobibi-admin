@@ -25,9 +25,7 @@ class Category extends PureComponent {
       selectedRowKeys,
     } = category
 
-    const {
-      userInfo
-    } = app
+    const { userInfo } = app
 
     const handleRefresh = newQuery => {
       router.push({
@@ -49,7 +47,9 @@ class Category extends PureComponent {
       maskClosable: false,
       confirmLoading: loading.effects[`category/${modalType}`],
       title: `${
-        modalType === 'create' ? i18n.t`Create Category` : i18n.t`Update Category`
+        modalType === 'create'
+          ? i18n.t`Create Category`
+          : i18n.t`Update Category`
       }`,
       centered: true,
       onOk(data) {

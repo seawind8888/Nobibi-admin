@@ -95,8 +95,8 @@ class Login extends PureComponent {
               >
                 <Trans>Sign in</Trans>
               </Button>
-            
-              <p style={{margin:'5px 0'}}>
+
+              <p style={{ margin: '5px 0' }}>
                 <span>
                   <Trans>Name</Trans>
                   ：admin
@@ -106,7 +106,16 @@ class Login extends PureComponent {
                   ：123456
                 </span>
               </p>
-              <p style={{margin:0}}>请先还原<a target="_blank" href="https://github.com/seawind8888/Nobibi-api">Nobibi-api</a>数据库，再登录</p>
+              <p style={{ margin: 0 }}>
+                请先还原
+                <a
+                  target="_blank"
+                  href="https://github.com/seawind8888/Nobibi-api"
+                >
+                  Nobibi-api
+                </a>
+                数据库，再登录
+              </p>
             </Row>
           </form>
         </div>

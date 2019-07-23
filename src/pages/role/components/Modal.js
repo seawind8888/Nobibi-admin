@@ -20,22 +20,21 @@ class RoleModal extends PureComponent {
   handleOk = () => {
     const { item = {}, onOk, form } = this.props
     const { validateFields, getFieldsValue } = form
-    
 
     validateFields(errors => {
       if (errors) {
         return
       }
       const data = {
-        ...getFieldsValue()
+        ...getFieldsValue(),
         // key: item.key,
       }
       const _data = cloneDeep(data)
-      if(_data.permission.indexOf('0')<0) {
+      if (_data.permission.indexOf('0') < 0) {
         _data.permission.unshift('0')
       }
       _data._id = item._id
-     
+
       onOk(_data)
     })
   }
@@ -47,7 +46,7 @@ class RoleModal extends PureComponent {
     return (
       <Modal {...modalProps} onOk={this.handleOk}>
         <Form layout="horizontal">
-        <FormItem label={i18n.t`RoleName`} hasFeedback {...formItemLayout}>
+          <FormItem label={i18n.t`RoleName`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('roleName', {
               initialValue: item.roleName,
               rules: [
@@ -57,28 +56,30 @@ class RoleModal extends PureComponent {
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem label={i18n.t`RolePermission`} hasFeedback {...formItemLayout}>
-          {getFieldDecorator('permission', {
-              initialValue: item.permission?item.permission:[],
+          <FormItem
+            label={i18n.t`RolePermission`}
+            hasFeedback
+            {...formItemLayout}
+          >
+            {getFieldDecorator('permission', {
+              initialValue: item.permission ? item.permission : [],
               rules: [
                 {
                   required: true,
                 },
               ],
             })(
-            <Select
-              mode="multiple"
-              placeholder="Please select"
-              style={{ width: '100%' }}
-            >
-              {
-                menuList.map((e, i) => (
-                 <Option key={i}>{e}</Option>
-                ))
-              }
-            </Select>
+              <Select
+                mode="multiple"
+                placeholder="Please select"
+                style={{ width: '100%' }}
+              >
+                {menuList.map((e, i) => (
+                  <Option key={i}>{e}</Option>
+                ))}
+              </Select>
             )}
-          </FormItem>         
+          </FormItem>
         </Form>
       </Modal>
     )

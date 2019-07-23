@@ -4,13 +4,7 @@ import { pathMatchRegexp } from 'utils'
 import api from 'api'
 import { pageModel } from 'utils/model'
 
-const {
-  queryUserList,
-  createUser,
-  removeUser,
-  updateUser,
-  queryRoleList
-} = api
+const { queryUserList, createUser, removeUser, updateUser, queryRoleList } = api
 
 export default modelExtend(pageModel, {
   namespace: 'user',
@@ -26,7 +20,7 @@ export default modelExtend(pageModel, {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
-        dispatch({ type: 'queryRoleSelect'})
+        dispatch({ type: 'queryRoleSelect' })
         if (pathMatchRegexp('/user', location.pathname)) {
           const payload = location.query || { page: 1, pageSize: 10 }
           dispatch({
@@ -40,7 +34,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const {data} = yield call(queryUserList, payload)
+      const { data } = yield call(queryUserList, payload)
       if (data) {
         yield put({
           type: 'querySuccess',
@@ -55,20 +49,20 @@ export default modelExtend(pageModel, {
         })
       }
     },
-    *queryRoleSelect({ payload = {}}, { call, put }){
-      const {data} = yield call(queryRoleList, payload)
+    *queryRoleSelect({ payload = {} }, { call, put }) {
+      const { data } = yield call(queryRoleList, payload)
       if (data) {
         yield put({
           type: 'updateState',
           payload: {
-            roleSelectList: data.list
+            roleSelectList: data.list,
           },
         })
       }
     },
 
     *delete({ payload }, { call, put, select }) {
-      const data = yield call(removeUser, payload )
+      const data = yield call(removeUser, payload)
       const { selectedRowKeys } = yield select(_ => _.user)
       if (data.success) {
         yield put({

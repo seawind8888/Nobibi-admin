@@ -105,7 +105,9 @@ class Filter extends Component {
           )}
         </Col>
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-          {getFieldDecorator('refUserRoleCode', { initialValue: refUserRoleCode })(
+          {getFieldDecorator('refUserRoleCode', {
+            initialValue: refUserRoleCode,
+          })(
             <Select
               style={{ width: 200 }}
               onChange={this.handleChangeRoles}
@@ -113,9 +115,7 @@ class Filter extends Component {
               allowClear
             >
               {roleSelectList.map(e => (
-                <Option key={e.roleName}>
-                  {e.roleName}
-                </Option>
+                <Option key={e.roleName}>{e.roleName}</Option>
               ))}
             </Select>
           )}

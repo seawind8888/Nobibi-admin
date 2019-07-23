@@ -25,30 +25,36 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onDeleteItem, onEditItem, i18n,menuList, ...tableProps } = this.props
+    const {
+      onDeleteItem,
+      onEditItem,
+      i18n,
+      menuList,
+      ...tableProps
+    } = this.props
 
     const columns = [
       {
         title: <Trans>RoleName</Trans>,
         dataIndex: 'roleName',
-        key: 'roleName'
+        key: 'roleName',
       },
       {
         title: <Trans>RolePermission</Trans>,
         dataIndex: 'permission',
         key: 'permission',
-        render: permission => 
-        <span>
-          {permission.map(e => {
-            const _tag = menuList[e]
-            return (
-              <Tag color="blue" key={_tag}>
-                {_tag}
-              </Tag>
-            )
-          })}
-         
-        </span>
+        render: permission => (
+          <span>
+            {permission.map(e => {
+              const _tag = menuList[e]
+              return (
+                <Tag color="blue" key={_tag}>
+                  {_tag}
+                </Tag>
+              )
+            })}
+          </span>
+        ),
       },
       {
         title: <Trans>Operation</Trans>,
@@ -74,7 +80,7 @@ class List extends PureComponent {
           ...tableProps.pagination,
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
-        style={{width:'100%'}}
+        style={{ width: '100%' }}
         className={styles.table}
         bordered
         scroll={{ x: true }}

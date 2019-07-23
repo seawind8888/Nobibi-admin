@@ -6,8 +6,9 @@ import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import qs from 'qs'
-import { router }  from 'utils'
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.getItem('Token');
+import { router } from 'utils'
+axios.defaults.headers.common['Authorization'] =
+  'Bearer ' + window.localStorage.getItem('Token')
 
 const { CancelToken } = axios
 window.cancelRequest = new Map()
@@ -16,7 +17,7 @@ export default function request(options) {
   options.withCredentials = true
   let { data, url, method = 'get' } = options
   const cloneData = cloneDeep(data)
- 
+
   try {
     let domain = process.env.API_HOST
     const urlMatch = url.match(/[a-zA-z]+:\/\/[^/]*/)
@@ -38,7 +39,7 @@ export default function request(options) {
     message.error(e.message)
   }
   options.headers = {
-    Authorization: 'Bearer ' + window.localStorage.getItem('Token')
+    Authorization: 'Bearer ' + window.localStorage.getItem('Token'),
   }
 
   options.url =
@@ -57,11 +58,11 @@ export default function request(options) {
     .then(response => {
       const { data } = response
       const { status } = data
-      const success = status === 200?true:false
+      const success = status === 200 ? true : false
       // if(!success) {
       //   message.error(data.message)
-      // } 
-      if(status === '401') {
+      // }
+      if (status === '401') {
         message.error('token已失效，请重新登录')
         router.push({
           pathname: '/login',
@@ -77,7 +78,6 @@ export default function request(options) {
       // } else {
       //   result.data = data
       // }
-  
 
       return Promise.resolve({
         success: success,

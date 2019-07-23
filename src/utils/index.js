@@ -253,41 +253,100 @@ export function setLocale(language) {
 }
 export function randomWord(obj) {
   obj = {
-      num: true,
-      minLetter: true,
-      maxLetter: true,
-      minLength: 2,
-      maxLength: 5,
-      randomFlag: true,
-      ...obj
+    num: true,
+    minLetter: true,
+    maxLetter: true,
+    minLength: 2,
+    maxLength: 5,
+    randomFlag: true,
+    ...obj,
   }
-  var str = "",
-      pos = 0,
-      range = obj.minLength,
-      arr = [],
-      nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-      minLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
-      maxLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  var str = '',
+    pos = 0,
+    range = obj.minLength,
+    arr = [],
+    nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    minLetters = [
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f',
+      'g',
+      'h',
+      'i',
+      'j',
+      'k',
+      'l',
+      'm',
+      'n',
+      'o',
+      'p',
+      'q',
+      'r',
+      's',
+      't',
+      'u',
+      'v',
+      'w',
+      'x',
+      'y',
+      'z',
+    ],
+    maxLetters = [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
+    ]
   if (obj.minLetter) {
-      arr.push(...minLetters)
+    arr.push(...minLetters)
   }
   if (obj.maxLetter) {
-      arr.push(...maxLetters)
+    arr.push(...maxLetters)
   }
   if (obj.num) {
-      arr.push(...nums)
+    arr.push(...nums)
   }
   // 随机产生
   if (obj.randomFlag) {
-      range = Math.round(Math.random() * (obj.maxLength - obj.minLength)) + obj.minLength;
+    range =
+      Math.round(Math.random() * (obj.maxLength - obj.minLength)) +
+      obj.minLength
   }
   for (var i = 0; i < range; i++) {
-      pos = Math.round(Math.random() * (arr.length - 1));
-      str += arr[pos];
+    pos = Math.round(Math.random() * (arr.length - 1))
+    str += arr[pos]
   }
-  return str;
+  return str
 }
 
-export function getRandomColor(){
-  return "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+export function getRandomColor() {
+  return (
+    '#' +
+    ('00000' + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6)
+  )
 }

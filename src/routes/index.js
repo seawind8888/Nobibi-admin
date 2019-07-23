@@ -1,12 +1,12 @@
-export default  [
+export default [
   {
     id: '1',
     name: 'Users',
     zh: {
-      name: '用户管理'
+      name: '用户管理',
     },
     'pt-br': {
-      name: 'Usuário'
+      name: 'Usuário',
     },
     icon: 'user',
     route: '/user',
@@ -15,10 +15,10 @@ export default  [
     id: '2',
     name: 'Role',
     zh: {
-      name: '角色管理'
+      name: '角色管理',
     },
     'pt-br': {
-      name: 'Usuário'
+      name: 'Usuário',
     },
     icon: 'team',
     route: '/role',
@@ -27,10 +27,10 @@ export default  [
     id: '3',
     name: 'category',
     zh: {
-      name: '分类管理'
+      name: '分类管理',
     },
     'pt-br': {
-      name: 'Usuário'
+      name: 'Usuário',
     },
     icon: 'apartment',
     route: '/category',
@@ -39,10 +39,10 @@ export default  [
     id: '4',
     name: 'Topic',
     zh: {
-      name: '主题管理'
+      name: '主题管理',
     },
     'pt-br': {
-      name: 'Posts'
+      name: 'Posts',
     },
     icon: 'read',
     route: '/post',
@@ -51,13 +51,12 @@ export default  [
     id: '5',
     name: 'Comment',
     zh: {
-      name: '评论管理'
+      name: '评论管理',
     },
     'pt-br': {
-      name: 'Usuário'
+      name: 'Usuário',
     },
     icon: 'message',
     route: '/comment',
   },
-  
 ]

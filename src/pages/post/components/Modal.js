@@ -20,20 +20,20 @@ const formItemLayout = {
 @Form.create()
 class PostModal extends PureComponent {
   state = {
-    userAvatar: ''
+    userAvatar: '',
   }
   handleOk = () => {
-    const { item = {}, onOk,form, userInfo } = this.props
+    const { item = {}, onOk, form, userInfo } = this.props
     const { validateFields, getFieldsValue } = form
     validateFields(errors => {
       if (errors) {
         return
       }
       const data = {
-        ...getFieldsValue()
+        ...getFieldsValue(),
         // key: item.key,
       }
-      data.desc = data.content.toRAW(true).blocks[0].text.slice(0,50)
+      data.desc = data.content.toRAW(true).blocks[0].text.slice(0, 50)
       data.content = data.content.toHTML()
       data._id = item._id
       data.userAvatar = this.state.userAvatar
@@ -44,11 +44,18 @@ class PostModal extends PureComponent {
   handleSelectChange = value => {
     this.props.form.setFieldsValue({
       content: value,
-    });
-  };
+    })
+  }
 
   render() {
-    const { item = {}, onOk, form, i18n,  categoryList, ...modalProps } = this.props
+    const {
+      item = {},
+      onOk,
+      form,
+      i18n,
+      categoryList,
+      ...modalProps
+    } = this.props
     const { getFieldDecorator } = form
     const editorState = BraftEditor.createEditorState(item.content)
 
@@ -57,15 +64,19 @@ class PostModal extends PureComponent {
         <Form layout="horizontal">
           <FormItem label={i18n.t`PostTitle`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('topicTitle', {
-              initialValue: item.topicTitle?item.topicTitle:'',
+              initialValue: item.topicTitle ? item.topicTitle : '',
               rules: [
                 {
                   required: true,
                 },
               ],
-            })(<Input/>)}
+            })(<Input />)}
           </FormItem>
-          <FormItem label={i18n.t`PostCategory`} hasFeedback {...formItemLayout}>
+          <FormItem
+            label={i18n.t`PostCategory`}
+            hasFeedback
+            {...formItemLayout}
+          >
             {getFieldDecorator('categoryName', {
               initialValue: item.category,
               rules: [
@@ -74,15 +85,13 @@ class PostModal extends PureComponent {
                 },
               ],
             })(
-            <Select>
-              {categoryList.map((item, index) => (
-                <Select.Option 
-                  
-                  value={item.categoryName} key={index}>
-                  {item.categoryName}
-                </Select.Option>
-              ))}
-            </Select>
+              <Select>
+                {categoryList.map((item, index) => (
+                  <Select.Option value={item.categoryName} key={index}>
+                    {item.categoryName}
+                  </Select.Option>
+                ))}
+              </Select>
             )}
           </FormItem>
           <FormItem label={i18n.t`PostStatus`} hasFeedback {...formItemLayout}>
@@ -94,29 +103,26 @@ class PostModal extends PureComponent {
                 },
               ],
             })(
-            <Select>
-              <Select.Option value={'PUBLISH'}>
-                <Trans>Publish</Trans>
-              </Select.Option>
-              <Select.Option value={'DRAFT'}>
-                <Trans>Draft</Trans>
-              </Select.Option>
-            </Select>
+              <Select>
+                <Select.Option value={'PUBLISH'}>
+                  <Trans>Publish</Trans>
+                </Select.Option>
+                <Select.Option value={'DRAFT'}>
+                  <Trans>Draft</Trans>
+                </Select.Option>
+              </Select>
             )}
           </FormItem>
-          <FormItem label={i18n.t`PostContent`} hasFeedback {...formItemLayout} >
+          <FormItem label={i18n.t`PostContent`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('content', {
-                initialValue: editorState
-              })(
-                <BraftEditor
-                  onChange={this.handleSelectChange}
-                  style={{border: '1px #dddddd solid', borderRadius: '2px'}}
-                />
-              )}
-           
+              initialValue: editorState,
+            })(
+              <BraftEditor
+                onChange={this.handleSelectChange}
+                style={{ border: '1px #dddddd solid', borderRadius: '2px' }}
+              />
+            )}
           </FormItem>
-          
-         
         </Form>
       </Modal>
     )

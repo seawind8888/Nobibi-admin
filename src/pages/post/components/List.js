@@ -24,17 +24,16 @@ class List extends PureComponent {
     }
   }
 
-  topicStatus = (str = "") => {
-      switch (str) {
-          case "PUBLISH":
-              return '已发布'
-          case "DRAFT":
-              return '草稿'
-          default:
-              return ' '
-      }
+  topicStatus = (str = '') => {
+    switch (str) {
+      case 'PUBLISH':
+        return '已发布'
+      case 'DRAFT':
+        return '草稿'
+      default:
+        return ' '
+    }
   }
-
 
   render() {
     const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
@@ -42,35 +41,35 @@ class List extends PureComponent {
     const columns = [
       {
         title: <Trans>ID</Trans>,
-        render: (text, record, index) => <span>{index+1}</span>
+        render: (text, record, index) => <span>{index + 1}</span>,
       },
       {
         title: <Trans>PostTitle</Trans>,
         dataIndex: 'topicTitle',
-        key: 'topicTitle'
+        key: 'topicTitle',
       },
       {
         title: <Trans>PostAuther</Trans>,
         dataIndex: 'userName',
-        key: 'userName'
+        key: 'userName',
       },
       {
         title: <Trans>PostStatus</Trans>,
         dataIndex: 'status',
         key: 'status',
-        render: text => 
+        render: text => (
           <span>
-            <Tag color={text === 'PUBLISH'?'green':'red'}>
+            <Tag color={text === 'PUBLISH' ? 'green' : 'red'}>
               {this.topicStatus(text)}
             </Tag>
           </span>
+        ),
       },
       {
         title: <Trans>PostCategory</Trans>,
         dataIndex: 'categoryName',
         key: 'categoryName',
-        render: (categoryName)  =>  <Tag>{categoryName}</Tag>
-        
+        render: categoryName => <Tag>{categoryName}</Tag>,
       },
       {
         title: <Trans>CreateTime</Trans>,
@@ -101,7 +100,7 @@ class List extends PureComponent {
           ...tableProps.pagination,
           showTotal: total => i18n.t`Total ${total} Items`,
         }}
-        style={{width:'100%'}}
+        style={{ width: '100%' }}
         className={styles.table}
         bordered
         scroll={{ x: true }}

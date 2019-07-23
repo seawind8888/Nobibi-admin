@@ -4,10 +4,7 @@ import { pathMatchRegexp } from 'utils'
 import api from 'api'
 import { pageModel } from 'utils/model'
 
-const {
-  queryCommentList,
-  removeComment,
-} = api
+const { queryCommentList, removeComment } = api
 
 export default modelExtend(pageModel, {
   namespace: 'comment',
@@ -32,7 +29,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-      const {data} = yield call(queryCommentList, payload)
+      const { data } = yield call(queryCommentList, payload)
       if (data) {
         yield put({
           type: 'querySuccess',

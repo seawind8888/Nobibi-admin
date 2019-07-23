@@ -21,15 +21,17 @@ export default {
     },
     userSelectList: [],
     categoryList: [],
-    routeList: [{
-      id: '0',
-      name: 'Dashboard',
-      zh: {
-        name: '面板'
+    routeList: [
+      {
+        id: '0',
+        name: 'Dashboard',
+        zh: {
+          name: '面板',
+        },
+        icon: 'dashboard',
+        route: '/dashboard',
       },
-      icon: 'dashboard',
-      route: '/dashboard'
-    }],
+    ],
     locationPathname: '',
     locationQuery: {},
     theme: store.get('theme') || 'light',
@@ -72,30 +74,35 @@ export default {
     },
 
     setup({ dispatch }) {
-      dispatch({ type: 'query' })
-      
+      dispatch({
+        type: 'query',
+      })
     },
   },
   effects: {
     *query({ payload }, { call, put, select }) {
-      const {success, data} = yield call(queryUserInfo, {username: window.localStorage.getItem('username')})
+      const { success, data } = yield call(queryUserInfo, {
+        username: window.localStorage.getItem('username'),
+      })
       const { locationPathname } = yield select(_ => _.app)
       if (success && data) {
         const userInfo = data
         window.localStorage.setItem('controlCode', userInfo._id)
         let permissions = {
-          visit: []
+          visit: [],
         }
         permissions.visit = userInfo.visit
-        let routeList  = [{
-          id: '0',
-          name: 'Dashboard',
-          zh: {
-            name: '面板'
+        let routeList = [
+          {
+            id: '0',
+            name: 'Dashboard',
+            zh: {
+              name: '面板',
+            },
+            icon: 'dashboard',
+            route: '/dashboard',
           },
-          icon: 'dashboard',
-          route: '/dashboard'
-        }]
+        ]
         const routeListFilter = routes.filter(item => {
           return permissions.visit.includes(String(item.id))
         })
@@ -108,7 +115,7 @@ export default {
             routeList,
           },
         })
-        if (pathMatchRegexp(['/','/login'], window.location.pathname)) {
+        if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
           router.push({
             pathname: '/dashboard',
           })
@@ -122,8 +129,7 @@ export default {
         })
       }
     },
-    
-  
+
     *signOut({ payload }, { call, put }) {
       const data = yield call(logoutUser)
       // Cookies.remove('username')
@@ -132,21 +138,26 @@ export default {
           type: 'updateState',
           payload: {
             userInfo: {},
-            permissions: { visit: [] },
-            routeList: [{
-              id: '0',
-              name: 'Dashboard',
-              zh: {
-                name: '面板'
+            permissions: {
+              visit: [],
+            },
+            routeList: [
+              {
+                id: '0',
+                name: 'Dashboard',
+                zh: {
+                  name: '面板',
+                },
+                icon: 'dashboard',
+                route: '/dashboard',
               },
-              icon: 'dashboard',
-              route: '/dashboard'
-            }]
+            ],
           },
         })
         window.localStorage.removeItem('Token')
-        yield put({ type: 'query' })
-       
+        yield put({
+          type: 'query',
+        })
       } else {
         throw data
       }

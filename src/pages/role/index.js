@@ -23,7 +23,7 @@ class Role extends PureComponent {
       modalVisible,
       modalType,
       selectedRowKeys,
-      menuList
+      menuList,
     } = role
 
     const handleRefresh = newQuery => {

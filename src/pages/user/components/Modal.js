@@ -20,7 +20,7 @@ const formItemLayout = {
 @Form.create()
 class UserModal extends PureComponent {
   state = {
-    roleSelectPermission: []
+    roleSelectPermission: [],
   }
   handleOk = () => {
     const { item = {}, onOk, form, modalType } = this.props
@@ -35,36 +35,42 @@ class UserModal extends PureComponent {
         controlCode: window.localStorage.getItem('controlCode'),
         // key: item.key,
       }
-      if(!!this.state.roleSelectPermission.length) {
+      if (!!this.state.roleSelectPermission.length) {
         data.visit = this.state.roleSelectPermission
       }
-      if(modalType === 'create') {
+      if (modalType === 'create') {
         data.avatar = getRandomColor()
-       
       }
-      if(data.password) {
+      if (data.password) {
         data.password = md5(data.password)
       }
-    
+
       onOk(data)
     })
   }
-  selectRoles = (rolesName) => {
+  selectRoles = rolesName => {
     const { roleSelectList } = this.props
     const roles = find(roleSelectList, ['roleName', rolesName])
     this.state.roleSelectPermission = roles.permission
   }
 
   render() {
-    const { item = {}, onOk, form, i18n, roleSelectList, ...modalProps } = this.props
+    const {
+      item = {},
+      onOk,
+      form,
+      i18n,
+      roleSelectList,
+      ...modalProps
+    } = this.props
     const { getFieldDecorator } = form
 
     return (
       <Modal {...modalProps} onOk={this.handleOk}>
         <Form layout="horizontal">
-        <FormItem label={i18n.t`Name`} hasFeedback {...formItemLayout}>
+          <FormItem label={i18n.t`Name`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('userName', {
-              initialValue: item.userName?item.userName:'',
+              initialValue: item.userName ? item.userName : '',
               rules: [
                 {
                   required: true,
@@ -74,15 +80,15 @@ class UserModal extends PureComponent {
           </FormItem>
           <FormItem label={i18n.t`Password`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('password', {
-              initialValue: item.password  || ''
+              initialValue: item.password || '',
             })(<Input.Password password="true" />)}
           </FormItem>
           <FormItem label={i18n.t`Email`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('email', {
-              initialValue: item.email  || '',
+              initialValue: item.email || '',
               rules: [
                 {
-                  required: true
+                  required: true,
                 },
               ],
             })(<Input />)}
@@ -96,34 +102,28 @@ class UserModal extends PureComponent {
                 },
               ],
             })(
-              <Select
-                onChange={this.selectRoles}>
+              <Select onChange={this.selectRoles}>
                 {roleSelectList.map(e => (
-                  <Option key={e.roleName}>
-                    {e.roleName}
-                  </Option>
+                  <Option key={e.roleName}>{e.roleName}</Option>
                 ))}
               </Select>
             )}
           </FormItem>
           <FormItem label={i18n.t`Status`} hasFeedback {...formItemLayout}>
             {getFieldDecorator('status', {
-              initialValue: item.status  || 'ENABLE',
+              initialValue: item.status || 'ENABLE',
               rules: [
                 {
                   required: true,
                 },
               ],
             })(
-              <Radio.Group style={{width: 150}}>
+              <Radio.Group style={{ width: 150 }}>
                 <Radio value={'ENABLE'}>开启</Radio>
                 <Radio value={'CLOSE'}>关闭</Radio>
               </Radio.Group>
             )}
-           
           </FormItem>
-          
-         
         </Form>
       </Modal>
     )
