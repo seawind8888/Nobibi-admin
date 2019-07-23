@@ -3,15 +3,14 @@
 import { router } from 'utils'
 import { stringify } from 'qs'
 import store from 'store'
-import { ROLE_TYPE } from 'utils/constant'
 import { queryLayout, pathMatchRegexp } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
 import routes from '../routes'
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
-const { queryRouteList, logoutUser, queryUserInfo, queryUserList, queryCategoryList, queryRoleList } = api
+const { logoutUser, queryUserInfo } = api
 
 export default {
   namespace: 'app',
@@ -79,7 +78,7 @@ export default {
   },
   effects: {
     *query({ payload }, { call, put, select }) {
-      const {success, data} = yield call(queryUserInfo, {username: Cookies.get('username')})
+      const {success, data} = yield call(queryUserInfo, {username: window.localStorage.getItem('username')})
       const { locationPathname } = yield select(_ => _.app)
       if (success && data) {
         const userInfo = data
@@ -127,25 +126,27 @@ export default {
   
     *signOut({ payload }, { call, put }) {
       const data = yield call(logoutUser)
-      Cookies.remove('username')
+      // Cookies.remove('username')
       if (data.success) {
         yield put({
           type: 'updateState',
           payload: {
             userInfo: {},
             permissions: { visit: [] },
-            menu: [
-              {
-                id: '1',
-                icon: 'laptop',
-                name: 'Dashboard',
-                zhName: '仪表盘',
-                router: '/dashboard',
+            routeList: [{
+              id: '0',
+              name: 'Dashboard',
+              zh: {
+                name: '面板'
               },
-            ],
+              icon: 'dashboard',
+              route: '/dashboard'
+            }]
           },
         })
+        window.localStorage.removeItem('Token')
         yield put({ type: 'query' })
+       
       } else {
         throw data
       }

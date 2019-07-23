@@ -1,10 +1,13 @@
 import axios from 'axios'
+
 // import Cookies from 'js-cookie'
 import { cloneDeep, isEmpty } from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import qs from 'qs'
+import { router }  from 'utils'
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.getItem('Token');
 
 const { CancelToken } = axios
 window.cancelRequest = new Map()
@@ -34,6 +37,9 @@ export default function request(options) {
   } catch (e) {
     message.error(e.message)
   }
+  options.headers = {
+    Authorization: 'Bearer ' + window.localStorage.getItem('Token')
+  }
 
   options.url =
     method.toLocaleLowerCase() === 'get'
@@ -55,6 +61,12 @@ export default function request(options) {
       // if(!success) {
       //   message.error(data.message)
       // } 
+      if(status === '401') {
+        message.error('token已失效，请重新登录')
+        router.push({
+          pathname: '/login',
+        })
+      }
       // const { message, status, data } = response
       // let result = {}
       // if (typeof data === 'object') {
