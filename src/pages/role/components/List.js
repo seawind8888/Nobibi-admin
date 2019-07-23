@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Table, Modal, Tag } from 'antd'
 import { DropOption } from 'components'
 import { Trans, withI18n } from '@lingui/react'
-import Link from 'umi/link'
 import styles from './List.less'
 const { confirm } = Modal
 

@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
-import { Trans, withI18n } from '@lingui/react'
+import { Form, Input, Radio, Modal, Select } from 'antd'
+import { withI18n } from '@lingui/react'
 import md5 from 'md5'
 import { find } from 'lodash'
 import { getRandomColor } from 'utils'
+const { Option } = Select
 
 const FormItem = Form.Item
 
@@ -51,7 +52,9 @@ class UserModal extends PureComponent {
   selectRoles = rolesName => {
     const { roleSelectList } = this.props
     const roles = find(roleSelectList, ['roleName', rolesName])
-    this.state.roleSelectPermission = roles.permission
+    this.setState({
+      roleSelectPermission: roles.permission,
+    })
   }
 
   render() {

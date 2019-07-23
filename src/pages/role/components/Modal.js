@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
-import { Trans, withI18n } from '@lingui/react'
+import { Form, Input, Modal, Select } from 'antd'
+import { withI18n } from '@lingui/react'
 import { cloneDeep } from 'lodash'
 
 const FormItem = Form.Item
@@ -75,7 +75,7 @@ class RoleModal extends PureComponent {
                 style={{ width: '100%' }}
               >
                 {menuList.map((e, i) => (
-                  <Option key={i}>{e}</Option>
+                  <Select.Option key={i}>{e}</Select.Option>
                 ))}
               </Select>
             )}

@@ -1,4 +1,3 @@
-/* global window */
 /* global document */
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'

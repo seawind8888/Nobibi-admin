@@ -20,7 +20,6 @@ import { Page } from 'components'
 
 import styles from './index.less'
 
-const { Option } = Select
 const InputGroup = Input.Group
 const methods = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE']
 
@@ -167,9 +166,9 @@ class RequestPage extends React.Component {
                   onChange={this.handleSelectChange}
                 >
                   {methods.map(item => (
-                    <Option value={item} key={item}>
+                    <Select.Option value={item} key={item}>
                       {item}
-                    </Option>
+                    </Select.Option>
                   ))}
                 </Select>
                 <Input

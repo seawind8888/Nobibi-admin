@@ -110,6 +110,7 @@ class Login extends PureComponent {
                 请先还原
                 <a
                   target="_blank"
+                  rel="noopener noreferrer"
                   href="https://github.com/seawind8888/Nobibi-api"
                 >
                   Nobibi-api

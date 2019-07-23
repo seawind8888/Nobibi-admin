@@ -1,4 +1,3 @@
-/* global window */
 import modelExtend from 'dva-model-extend'
 import { pathMatchRegexp } from 'utils'
 import api from 'api'

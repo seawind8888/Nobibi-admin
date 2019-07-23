@@ -29,7 +29,7 @@ const DropOption = ({
           type="bars"
         />
         <Icon type="down" />
-      </Button>{' '}
+      </Button>
     </Dropdown>
   )
 }

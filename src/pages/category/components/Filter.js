@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { FilterItem } from 'components'
 import { Trans, withI18n } from '@lingui/react'
-import { Form, Button, Row, Col, DatePicker, Input, Select } from 'antd'
+import { Form, Button, Row, Col, DatePicker, Input } from 'antd'
 
 const { Search } = Input
 const { RangePicker } = DatePicker
@@ -75,10 +75,6 @@ class Filter extends Component {
     fields[key] = values
     fields = this.handleFields(fields)
     onFilterChange(fields)
-  }
-  handleChangeRoles = (key, values) => {
-    const { form, onFilterChange } = this.props
-    console.log(key + ';' + values)
   }
 
   render() {

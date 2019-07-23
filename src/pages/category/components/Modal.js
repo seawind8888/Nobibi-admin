@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
-import { Trans, withI18n } from '@lingui/react'
-import { userInfo } from 'os'
+import { Form, Input, Modal } from 'antd'
+import { withI18n } from '@lingui/react'
 
 const FormItem = Form.Item
 

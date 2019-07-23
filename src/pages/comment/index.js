@@ -10,10 +10,10 @@ import List from './components/List'
 import Filter from './components/Filter'
 
 @withI18n()
-@connect(({ app, comment, loading }) => ({ app, comment, loading }))
+@connect(({ comment, loading }) => ({ comment, loading }))
 class Comment extends PureComponent {
   render() {
-    const { location, dispatch, comment, loading, app } = this.props
+    const { location, dispatch, comment, loading } = this.props
     const { query, pathname } = location
     const { list, pagination, selectedRowKeys } = comment
 

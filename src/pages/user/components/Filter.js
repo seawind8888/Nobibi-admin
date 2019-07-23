@@ -115,7 +115,7 @@ class Filter extends Component {
               allowClear
             >
               {roleSelectList.map(e => (
-                <Option key={e.roleName}>{e.roleName}</Option>
+                <Select.Option key={e.roleName}>{e.roleName}</Select.Option>
               ))}
             </Select>
           )}
