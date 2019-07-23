@@ -102,6 +102,7 @@
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "cross-env UMI_ENV=prod umi build",
     "lint:js": "eslint --ext .js src",
+    "precommit": "lint-staged",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "start": "umi dev",
     "test": "cross-env BABELRC=none umi test",

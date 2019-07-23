@@ -8,7 +8,6 @@ import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
 import routes from '../routes'
-// import Cookies from 'js-cookie'
 
 const { logoutUser, queryUserInfo } = api
 
