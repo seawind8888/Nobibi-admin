@@ -62,8 +62,10 @@ export default function request(options) {
       // if(!success) {
       //   message.error(data.message)
       // }
-      if (status === '401') {
+      if (status === 401) {
         message.error('token已失效，请重新登录')
+        window.localStorage.removeItem('Token')
+        window.localStorage.removeItem('username')
         router.push({
           pathname: '/login',
         })
