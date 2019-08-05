@@ -130,36 +130,37 @@ export default {
     },
 
     *signOut({ payload }, { call, put }) {
-      const data = yield call(logoutUser)
-      // Cookies.remove('username')
-      if (data.success) {
-        yield put({
-          type: 'updateState',
-          payload: {
-            userInfo: {},
-            permissions: {
-              visit: [],
-            },
-            routeList: [
-              {
-                id: '0',
-                name: 'Dashboard',
-                zh: {
-                  name: '面板',
-                },
-                icon: 'dashboard',
-                route: '/dashboard',
-              },
-            ],
-          },
-        })
-        window.localStorage.removeItem('Token')
-        yield put({
-          type: 'query',
-        })
-      } else {
-        throw data
-      }
+      // const data = yield call(logoutUser)
+      // // Cookies.remove('username')
+      // if (data.success) {
+      //   yield put({
+      //     type: 'updateState',
+      //     payload: {
+      //       userInfo: {},
+      //       permissions: {
+      //         visit: [],
+      //       },
+      //       routeList: [
+      //         {
+      //           id: '0',
+      //           name: 'Dashboard',
+      //           zh: {
+      //             name: '面板',
+      //           },
+      //           icon: 'dashboard',
+      //           route: '/dashboard',
+      //         },
+      //       ],
+      //     },
+      //   })
+      window.localStorage.removeItem('Token')
+      window.localStorage.removeItem('username')
+      yield put({
+        type: 'query',
+      })
+      // } else {
+      //   throw data
+      // }
     },
   },
   reducers: {
