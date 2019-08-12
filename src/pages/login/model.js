@@ -15,12 +15,12 @@ export default {
         username: payload.username,
         password: md5(payload.password),
       })
-      window.localStorage.setItem('username', payload.username)
-      window.localStorage.setItem('Token', res.data.token)
 
       const { locationQuery } = yield select(_ => _.app)
       if (res.success) {
         const { from } = locationQuery
+        window.localStorage.setItem('username', payload.username)
+        window.localStorage.setItem('Token', res.data.token)
         yield put({ type: 'app/query' })
         if (!pathMatchRegexp('/login', from)) {
           if (from === '/') router.push('/dashboard')
